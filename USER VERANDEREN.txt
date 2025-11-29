@@ -1,3 +1,5 @@
+Illuminate/Foundation/Auth/Gebruiker.php, ga hier heen voor het probleem op te lossen
+
 Verander User.php naar Gebruiker.php.
 Verander ook de class User naar class Gebruiker
 
