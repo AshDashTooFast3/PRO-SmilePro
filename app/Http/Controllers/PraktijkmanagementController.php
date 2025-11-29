@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Praktijkmanagement;
+use App\Models\Communicatie;
 use Illuminate\Http\Request;
 use App\Models\Bericht;
 
 class PraktijkmanagementController extends Controller
 {
-    private $bericht;
+    private $communicatie;
 
     public function __construct() {
-        $this->bericht = new Bericht();
+        $this->communicatie = new Communicatie();
     }
 
     public function index() {
@@ -20,9 +20,11 @@ class PraktijkmanagementController extends Controller
     }
     
     public function berichten() {
-        
+        $berichten = $this->communicatie->all();
+
         return view("praktijkmanagement.berichten", [
             "title"=> "Berichten Overzicht",
+            "berichten" => $berichten,
         ]);
     }
 }
