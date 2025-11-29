@@ -21,7 +21,7 @@ class RoleMiddleware
             return redirect("/login");
         }
 
-        $userRole = strtolower($user->rolename ?? ''); // Assuming 'role' is a field in the users table
+        $userRole = strtolower($user->RolNaam ?? ''); // Assuming 'role' is a field in the users table
 
         if(!in_array($userRole, [$roles,true])) {
             abort(403, 'Unauthorized action.');

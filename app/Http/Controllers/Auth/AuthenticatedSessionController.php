@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $role = strtolower($request->user()->rolename ?? '');
+        $role = strtolower($request->user()->RolNaam ?? '');
 
         return redirect()->intended(match($role){
             'praktijkmanagement' => route('praktijkmanagement.index'),
