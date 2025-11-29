@@ -46,4 +46,10 @@ class Gebruiker extends Authenticatable
     {
         return $this->hasMany(Persoon::class, 'GebruikerId');
     }
+    
+    public function getAuthPassword()
+{
+    return $this->Wachtwoord;
+}
+
 }
