@@ -20,11 +20,10 @@ class PraktijkmanagementController extends Controller
     }
     
     public function berichten() {
-        $berichten = $this->communicatie->all();
 
         return view("praktijkmanagement.berichten", [
             "title"=> "Berichten Overzicht",
-            "berichten" => $berichten,
+            "berichten" => ""
         ]);
     }
 }
