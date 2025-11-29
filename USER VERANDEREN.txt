@@ -1,0 +1,11 @@
+Illuminate/Foundation/Auth/Gebruiker.php, ga hier heen voor het probleem op te lossen
+
+Verander User.php naar Gebruiker.php.
+Verander ook de class User naar class Gebruiker
+
+iedere keer wanneer je composer update doet, gebeurt dit. (zet hier meer commando's als ze deze bug ook veroorzaken)
+
+Error die je zal krijgen is bijvoorbeeld: 
+
+include(/home/hamid/phpprojecten/SmilePro/vendor/composer/../laravel/framework/src/Illuminate/Foundation/Auth/Gebruiker.php): Failed to open stream: No such file or directory
+
