@@ -17,13 +17,14 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         $user = Auth::user();
+
         if(!$user) {
             return redirect("/login");
         }
 
         $userRole = strtolower($user->RolNaam ?? ''); // Assuming 'role' is a field in the users table
 
-        if(!in_array($userRole, [$roles,true])) {
+        if(!in_array($userRole, $roles, true)) {
             abort(403, 'Unauthorized action.');
         }
         
