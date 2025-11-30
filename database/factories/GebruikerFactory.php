@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\Gebruiker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Gebruiker>
@@ -36,5 +37,6 @@ class GebruikerFactory extends Factory
             'Datumgewijzigd'   => now(),
             'remember_token'   => Str::random(10),
         ];
-    }
+    
+}
 }

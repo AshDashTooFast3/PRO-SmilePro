@@ -11,6 +11,10 @@
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
                 </div>
+
+                <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <strong><p>Aantal afspraken:</p></strong> {{ $aantalAfspraken }}<br>
+                </div>
             </div>
         </div>
     </div>

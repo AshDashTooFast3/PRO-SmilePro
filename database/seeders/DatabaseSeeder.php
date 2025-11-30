@@ -17,8 +17,16 @@ class DatabaseSeeder extends Seeder
     {
 
         Gebruiker::factory()->create([
-            'Gebruikersnaam' => 'Test User',
-            'Email' => 'test@example.com',
+            'Gebruikersnaam' => 'Praktijkmanagement',
+            'Email' => 'Praktijkmanagement@smilepro.nl',
+            'Wachtwoord'=> bcrypt('achraf1532'),
+            'RolNaam' => 'Praktijkmanagement',
         ]);
+       $this->call(AfspraakSeeder::class);
+       $this->call(PersoonSeeder::class);
+       $this->call(PatientSeeder::class);
+       $this->call(MedewerkerSeeder::class);
+       $this->call(CommunicatieSeeder::class);
+
     }
 }
