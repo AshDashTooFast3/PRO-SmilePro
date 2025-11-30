@@ -16,9 +16,18 @@
                     <strong>
                         <p>
                             Aantal afspraken:
+                            @if ($aantalAfspraken > 0)
                             <span style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #4F46E5; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">
                                 {{ $aantalAfspraken }}
                             </span>
+                            @else
+                            <span style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #EF4444; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">
+                                0
+                            </span>
+                            <span style="margin-left: 10px; color: #EF4444;">
+                                er zijn nog geen afspraken gemaakt
+                            </span>
+                            @endif
                         </p>
                     </strong>
                     <br>
