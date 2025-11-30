@@ -36,5 +36,6 @@ class GebruikerFactory extends Factory
             'Datumgewijzigd'   => now(),
             'remember_token'   => Str::random(10),
         ];
-    }
+    
+}
 }

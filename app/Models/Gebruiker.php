@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\Gebruiker as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable; // ✅ Correct base class
 use Illuminate\Notifications\Notifiable;
 
 class Gebruiker extends Authenticatable
@@ -11,7 +11,7 @@ class Gebruiker extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'Gebruiker';
-
+    protected $primaryKey = 'Id'; // ← add this
     public $timestamps = false;
 
     protected $fillable = [
@@ -32,24 +32,19 @@ class Gebruiker extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'Wachtwoord' => 'hashed',
-            'Ingelogd' => 'datetime',
-            'Uitgelogd' => 'datetime',
-        ];
-    }
+    protected $casts = [
+        'Ingelogd' => 'datetime',
+        'Uitgelogd' => 'datetime',
+    ];
 
-    // Een Gebruiker heeft veel Personen
     public function personen()
     {
         return $this->hasMany(Persoon::class, 'GebruikerId');
     }
-    
-    public function getAuthPassword()
-{
-    return $this->Wachtwoord;
-}
 
+    // Laravel will use this column for password verification
+    public function getAuthPassword()
+    {
+        return $this->Wachtwoord;
+    }
 }

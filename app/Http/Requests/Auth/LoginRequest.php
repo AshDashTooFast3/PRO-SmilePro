@@ -43,9 +43,12 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        // Optional: normalize email to lowercase if DB stores emails lowercase
+        $email = strtolower($this->Email);
+
         if (! Auth::attempt([
-            'Email' => $this->Email,
-            'password' => $this->Wachtwoord,
+            'email' => $email,          // DB column
+            'password' => $this->Wachtwoord, // Auth calls getAuthPassword()
         ], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
@@ -53,7 +56,6 @@ class LoginRequest extends FormRequest
                 'Email' => trans('auth.failed'),
             ]);
         }
-
     }
 
     /**

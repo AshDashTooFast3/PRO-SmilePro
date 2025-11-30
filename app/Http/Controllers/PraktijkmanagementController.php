@@ -14,8 +14,11 @@ class PraktijkmanagementController extends Controller
     }
 
     public function index() {
+        $aantalAfspraken = \App\Models\Afspraken::query()->getModel()->getAfsprakenCount();
+        
         return view("praktijkmanagement.index", [
             "title"=> "Praktijkmanagement Dashboard",
+            "aantalAfspraken" => $aantalAfspraken
         ]);
     }
     
