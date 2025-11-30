@@ -12,6 +12,6 @@ class AfspraakSeeder extends Seeder
      */
     public function run(): void
     {
-        Afspraken::factory()->count(1)->create();
+        Afspraken::factory()->count(4)->create();
     }
 }

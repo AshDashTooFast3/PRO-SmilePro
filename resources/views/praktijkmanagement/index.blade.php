@@ -12,8 +12,16 @@
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
                 </div>
 
-                <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                    <strong><p>Aantal afspraken:</p></strong> {{ $aantalAfspraken }}<br>
+                <div class="p-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 text-gray-100 text-2xl">
+                    <strong>
+                        <p>
+                            Aantal afspraken:
+                            <span style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #4F46E5; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">
+                                {{ $aantalAfspraken }}
+                            </span>
+                        </p>
+                    </strong>
+                    <br>
                 </div>
             </div>
         </div>
