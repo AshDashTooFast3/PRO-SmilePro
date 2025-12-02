@@ -28,7 +28,7 @@ class Communicatie extends Model
 
     public function getAllCommunicatie()
     {
-        return DB::select("SELECT * FROM communicatie WHERE Isactief = 1");
+        return DB::select("CALL sp_GetAllCommunicatie()");
     }
 
     // A Bericht belongs to a Patient
