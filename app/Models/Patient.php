@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
+
 
 class Patient extends Model
 {
     use HasFactory;
+
     protected $table = 'Patient';
 
     protected $primaryKey = 'Id';
@@ -29,4 +32,9 @@ class Patient extends Model
     {
         return $this->belongsTo(Persoon::class, 'PersoonId');
     }
+
+    public static function getVolledigeNaamPatienten() {
+        return DB::select('CALL sp_getVolledigeNaamPatienten()');
+    }
+    
 }

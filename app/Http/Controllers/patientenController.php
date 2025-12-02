@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\PatientModel;
-
-use Illuminate\Http\Request;
+use App\Models\Patient;
 
 class patientenController extends Controller
 {
     public function index()
     {
-        $patienten = PatientModel::all();
-
-        return view(['patienten.overzicht-patienten', ]);
+        $patienten = Patient::getVolledigeNaamPatienten();
+        
+        return view('patienten.overzicht-patienten', 
+        [
+        'patienten' => $patienten,
+        'title' => 'Patienten Overzicht'  
+    ]);
     }
 }
