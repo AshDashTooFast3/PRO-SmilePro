@@ -8,7 +8,12 @@ class MedewerkerOverzichtController extends Controller
 {
     public function index()
     {
-        $medewerkers = MedewerkerOverzichtModel::with('persoon')->get();
+        // Toggle hier: zet op true of false om scenario te simuleren
+        $toonMedewerkers = true;
+
+        $medewerkers = $toonMedewerkers
+            ? MedewerkerOverzichtModel::with('persoon')->get()
+            : collect(); // lege collectie → unhappy scenario
 
         return view('Medewerker.MedewerkerOverzicht', compact('medewerkers'));
     }

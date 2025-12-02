@@ -31,14 +31,14 @@
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
                 <x-text-input
-                    id="password"
-                    name="password"
+                    id="Wachtwoord"
+                    name="Wachtwoord"
                     type="password"
                     class="mt-1 block w-3/4"
                     placeholder="{{ __('Password') }}"
                 />
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->userDeletion->get('Wachtwoord')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
