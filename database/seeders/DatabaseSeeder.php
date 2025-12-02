@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Gebruiker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,11 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Gebruiker::factory()->create([
+            'Gebruikersnaam' => 'Praktijkmanagement',
+            'Email' => 'Praktijkmanagement@smilepro.nl',
+            'Wachtwoord'=> bcrypt('achraf1532'),
+            'RolNaam' => 'Praktijkmanagement',
         ]);
+       $this->call(AfspraakSeeder::class);
+       $this->call(PersoonSeeder::class);
+       $this->call(PatientSeeder::class);
+       $this->call(MedewerkerSeeder::class);
+       $this->call(CommunicatieSeeder::class);
+
     }
 }

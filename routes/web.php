@@ -1,12 +1,24 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\patientenController;
+use App\Http\Controllers\PraktijkmanagementController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'index'])
+    ->name('praktijkmanagement.index')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+
+Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class, 'berichten'])
+    ->name('praktijkmanagement.berichten')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
