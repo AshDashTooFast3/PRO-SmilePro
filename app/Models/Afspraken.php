@@ -24,7 +24,7 @@ class Afspraken extends Model
         'Opmerking'
     ];
 
-    public function getAfsprakenCount() {
+    public static function getAfsprakenCount() {
         return DB::select('CALL sp_GetAfsprakenCount()')[0]->AfsprakenCount ?? 0;
     }
 }

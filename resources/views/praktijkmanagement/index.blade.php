@@ -14,7 +14,7 @@
 
                 <div class="p-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 text-gray-100 text-2xl">
                     <strong>
-                        <p>
+                        <p class="text-white p-4">
                             Aantal afspraken gemaakt:
                             @if ($aantalAfspraken > 0)
                             <span style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #4F46E5; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">
