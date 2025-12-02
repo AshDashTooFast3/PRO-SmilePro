@@ -260,7 +260,3 @@ INSERT INTO Feedback (Id,PatientId,Beoordeling,praktijkEmail,praktijkTelefoon,Is
 (3,3,3,'info@praktijk.nl','0201234567',1,NULL,SYSDATE(6),SYSDATE(6)),
 (4,4,5,'info@praktijk.nl','0201234567',1,NULL,SYSDATE(6),SYSDATE(6)),
 (5,5,4,'info@praktijk.nl','0201234567',1,NULL,SYSDATE(6),SYSDATE(6));
-
-/* ======================================================
-    CREATE STORED PROCEDURES
-    ====================================================== */

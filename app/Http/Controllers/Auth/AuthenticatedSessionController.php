@@ -32,7 +32,8 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->intended(match($role){
             'praktijkmanagement' => route('praktijkmanagement.index'),
-            default => route('dashboard'),
+            'tandarts' => route('dashboard'),
+            default => route('welcome'),
         });
     }
 
