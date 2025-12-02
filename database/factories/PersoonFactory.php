@@ -19,7 +19,7 @@ class PersoonFactory extends Factory
         return [
             'GebruikerId' => \App\Models\Gebruiker::factory(),
             'Voornaam' => $this->faker->firstName(),
-            'Tussenvoegsel' => $this->faker->optional()->randomElement(['van', 'de', 'der', '']),
+            'Tussenvoegsel' => $this->faker->optional()->randomElement(['van', 'de', 'der', 'den', 'ter']),
             'Achternaam' => $this->faker->lastName(),
             'Geboortedatum' => $this->faker->date('Y-m-d'),
             'Isactief' => true,

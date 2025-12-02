@@ -17,11 +17,13 @@ BEGIN
         -- Patient info
         PAT.Nummer AS PatientNummer,
         PER_PAT.Voornaam AS PatientVoornaam,
+        PER_PAT.Tussenvoegsel AS PatientTussenvoegsel,
         PER_PAT.Achternaam AS PatientAchternaam,
 
         -- Medewerker info
         MED.Nummer AS MedewerkerNummer,
         PER_MED.Voornaam AS MedewerkerVoornaam,
+        PER_MED.Tussenvoegsel AS MedewerkerTussenvoegsel,
         PER_MED.Achternaam AS MedewerkerAchternaam
 
     FROM Communicatie COM
