@@ -51,11 +51,9 @@
                                 @empty
                                     <tr>
                                         <td colspan="4"
-                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen
-                                            berichten gevonden.</td>
+                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen berichten gevonden.</td>
                                     </tr>
                                 @endforelse
-
                             </tbody>
                         </table>
                     </div>
