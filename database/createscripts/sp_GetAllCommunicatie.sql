@@ -6,20 +6,30 @@ DELIMITER $$
 
 CREATE PROCEDURE sp_GetAllCommunicatie()
 BEGIN
-    SELECT COM.Id
-            , COM.PatientId
-            , COM.MedewerkerId
-            , COM.Bericht
-            , COM.VerzondenDatum
-            , COM.Isactief
-            , PAT.Nummer AS PatientNummer
-            , MED.Nummer AS MedewerkerNummer
-            , PER.Voornaam 
-            , PER.Achternaam
+    SELECT 
+        COM.Id,
+        COM.PatientId,
+        COM.MedewerkerId,
+        COM.Bericht,
+        COM.VerzondenDatum,
+        COM.Isactief,
+
+        -- Patient info
+        PAT.Nummer AS PatientNummer,
+        PER_PAT.Voornaam AS PatientVoornaam,
+        PER_PAT.Achternaam AS PatientAchternaam,
+
+        -- Medewerker info
+        MED.Nummer AS MedewerkerNummer,
+        PER_MED.Voornaam AS MedewerkerVoornaam,
+        PER_MED.Achternaam AS MedewerkerAchternaam
+
     FROM Communicatie COM
+    
     INNER JOIN Medewerker MED ON COM.MedewerkerId = MED.Id
+    INNER JOIN Persoon PER_MED ON MED.PersoonId = PER_MED.Id
     INNER JOIN Patient PAT ON COM.PatientId = PAT.Id
-    INNER JOIN Persoon PER ON PAT.PersoonId = PER.Id;
+    INNER JOIN Persoon PER_PAT ON PAT.PersoonId = PER_PAT.Id;
 END$$
 
 DELIMITER ;

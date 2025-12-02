@@ -14,20 +14,30 @@
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Patient</th>
-                                    <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Medewerker</th>
-                                    <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Bericht</th>
-                                    <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Verzonden Datum</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Patient</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Medewerker</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Bericht</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Verzonden Datum</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 @forelse($berichten as $bericht)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            {{ $bericht->PatientNummer }} - {{ $bericht->Voornaam }} {{ $bericht->Achternaam }}
+                                            {{ $bericht->PatientNummer }} - {{ $bericht->PatientVoornaam }}
+                                            {{ $bericht->PatientAchternaam }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            {{ $bericht->MedewerkerNummer }}
+                                            {{ $bericht->MedewerkerNummer }} - {{ $bericht->MedewerkerVoornaam }}
+                                            {{ $bericht->MedewerkerAchternaam }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                             {{ $bericht->Bericht }}
@@ -38,9 +48,12 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen berichten gevonden.</td>
+                                        <td colspan="4"
+                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen
+                                            berichten gevonden.</td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
                         </table>
                     </div>
