@@ -17,8 +17,8 @@ CREATE TABLE Gebruiker (
     ,Uitgelogd DATETIME NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
 );
 
 CREATE TABLE Persoon (
@@ -30,8 +30,8 @@ CREATE TABLE Persoon (
     ,Geboortedatum DATE NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (GebruikerId) REFERENCES Gebruiker(Id)
 );
 
@@ -42,8 +42,8 @@ CREATE TABLE Patient (
     ,MedischDossier VARCHAR(255) NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PersoonId) REFERENCES Persoon(Id)
 );
 
@@ -56,8 +56,8 @@ CREATE TABLE Medewerker (
     ,Beschikbaarheid VARCHAR(20) NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PersoonId) REFERENCES Persoon(Id)
 );
 
@@ -71,8 +71,8 @@ CREATE TABLE Beschikbaarheid (
     ,Status ENUM('Aanwezig', 'Afwezig', 'Verlof', 'Ziek') NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (MedewerkerId) REFERENCES Medewerker(Id)
 );
 
@@ -88,8 +88,8 @@ CREATE TABLE Contact (
     ,Email VARCHAR(100) NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PatientId) REFERENCES Patient(Id)
 );
 
@@ -102,8 +102,8 @@ CREATE TABLE Afspraken (
     ,Status ENUM('Bevestigd', 'Geannuleerd') NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PatientId) REFERENCES Patient(Id)
     ,FOREIGN KEY (MedewerkerId) REFERENCES Medewerker(Id)
 );
@@ -120,8 +120,8 @@ CREATE TABLE Behandeling (
     ,Status ENUM('Behandeld', 'Onbehandeld', 'Uitgesteld') NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (MedewerkerId) REFERENCES Medewerker(Id)
     ,FOREIGN KEY (PatientId) REFERENCES Patient(Id)
 );
@@ -136,8 +136,8 @@ CREATE TABLE Factuur (
     ,Status ENUM('Verzonden', 'Niet-Verzonden', 'Betaald', 'Onbetaald') NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PatientId) REFERENCES Patient(Id)
     ,FOREIGN KEY (BehandelingId) REFERENCES Behandeling(Id)
 );
@@ -150,8 +150,8 @@ CREATE TABLE Communicatie (
     ,VerzondenDatum DATETIME NOT NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PatientId) REFERENCES Patient(Id)
     ,FOREIGN KEY (MedewerkerId) REFERENCES Medewerker(Id)
 );
@@ -164,8 +164,8 @@ CREATE TABLE Feedback (
     ,praktijkTelefoon VARCHAR(20) NULL
     ,Isactief BIT NOT NULL
     ,Opmerking VARCHAR(255) NULL
-    ,Datumaangemaakt DATETIME NOT NULL DEFAULT NOW(6)
-    ,Datumgewijzigd DATETIME NOT NULL DEFAULT NOW(6)
+    ,Datumaangemaakt DATETIME(6) NOT NULL DEFAULT NOW(6)
+    ,Datumgewijzigd DATETIME(6) NOT NULL DEFAULT NOW(6)
     ,FOREIGN KEY (PatientId) REFERENCES Patient(Id)
 );
 
