@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         Gebruiker::factory()->create([
             'Gebruikersnaam' => 'Praktijkmanagement',
             'Email' => 'praktijkmanagement@smilepro.nl',
-            'Wachtwoord'=> bcrypt('achraf1532'),
+            'Wachtwoord'=> bcrypt('achraf123'),
             'RolNaam' => 'Praktijkmanagement',
         ]);
        $this->call(AfspraakSeeder::class);
