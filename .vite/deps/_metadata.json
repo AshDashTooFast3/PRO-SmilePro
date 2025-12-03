@@ -2,6 +2,7 @@
   "hash": "dbffe51b",
   "configHash": "75254284",
   "lockfileHash": "6b7c3346",
+<<<<<<< HEAD
   "browserHash": "3be08d33",
   "optimized": {
     "alpinejs": {
@@ -22,4 +23,9 @@
       "file": "chunk-PZ5AY32C.js"
     }
   }
+=======
+  "browserHash": "12c12357",
+  "optimized": {},
+  "chunks": {}
+>>>>>>> 95988ee (github problemen)
 }
