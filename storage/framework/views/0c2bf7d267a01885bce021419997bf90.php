@@ -1,0 +1,2 @@
+<img src="<?php echo e(asset('img/smilepro-logo.png')); ?>" alt="SmilePro-logo" style="width: 100px" />
+<?php /**PATH /home/hamid/phpprojecten/SmilePro/resources/views/components/application-logo.blade.php ENDPATH**/ ?>
