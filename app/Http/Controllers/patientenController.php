@@ -27,14 +27,19 @@ class patientenController extends Controller
     // Haal de patient via de relaties
     $patient = $gebruiker->patient;
 
-    if (! $patient->factuur) {
+    if (empty($patient)) {
+        Log::info('gebruiker is niet gekoppeld aan Patient.');
+        return view('patienten.factuurPatient', ['facturen' => [], 'title' => 'Mijn Facturen']);
+    }
+    
+    $patientId = $patient->Id;
+    
+    $facturen = Patient::getPatientFactuur($patientId);
+
+    if (empty($facturen)) {
         Log::info('Geen facturen beschikbaar.');
         return view('patienten.factuurPatient', ['facturen' => [], 'title' => 'Mijn Facturen']);
     }
-
-    $patientId = $patient->Id;
-
-    $facturen = Patient::getPatientFactuur($patientId);
 
     return view('patienten.factuurPatient', ['facturen' => $facturen, 'title' => 'Mijn Facturen']);
 }
