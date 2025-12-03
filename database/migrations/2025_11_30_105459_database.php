@@ -23,8 +23,8 @@ return new class extends Migration
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
             $table->string('remember_token', 100)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -51,8 +51,8 @@ return new class extends Migration
             $table->date('Geboortedatum');
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('GebruikerId')->references('Id')->on('Gebruiker');
         });
 
@@ -63,8 +63,8 @@ return new class extends Migration
             $table->string('MedischDossier', 255)->nullable();
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PersoonId')->references('Id')->on('Persoon');
         });
 
@@ -77,8 +77,8 @@ return new class extends Migration
             $table->string('Beschikbaarheid', 20)->nullable();
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PersoonId')->references('Id')->on('Persoon');
         });
 
@@ -92,8 +92,8 @@ return new class extends Migration
             $table->enum('Status', ['Aanwezig', 'Afwezig', 'Verlof', 'Ziek']);
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('MedewerkerId')->references('Id')->on('Medewerker');
         });
 
@@ -109,8 +109,8 @@ return new class extends Migration
             $table->string('Email', 100)->nullable();
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PatientId')->references('Id')->on('Patient');
         });
 
@@ -122,9 +122,8 @@ return new class extends Migration
             $table->time('Tijd');
             $table->enum('Status', ['Bevestigd', 'Geannuleerd']);
             $table->boolean('Isactief');
-            $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->string('Opmerking', 255)->nullable();                   $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PatientId')->references('Id')->on('Patient');
             $table->foreign('MedewerkerId')->references('Id')->on('Medewerker');
         });
@@ -141,8 +140,8 @@ return new class extends Migration
             $table->enum('Status', ['Behandeld', 'Onbehandeld', 'Uitgesteld']);
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('MedewerkerId')->references('Id')->on('Medewerker');
             $table->foreign('PatientId')->references('Id')->on('Patient');
         });
@@ -157,8 +156,8 @@ return new class extends Migration
             $table->enum('Status', ['Verzonden', 'Niet-Verzonden', 'Betaald', 'Onbetaald']);
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PatientId')->references('Id')->on('Patient');
             $table->foreign('BehandelingId')->references('Id')->on('Behandeling');
         });
@@ -171,8 +170,8 @@ return new class extends Migration
             $table->dateTime('VerzondenDatum');
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PatientId')->references('Id')->on('Patient');
             $table->foreign('MedewerkerId')->references('Id')->on('Medewerker');
         });
@@ -185,8 +184,8 @@ return new class extends Migration
             $table->string('praktijkTelefoon', 20)->nullable();
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
-            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
-            $table->dateTime('Datumgewijzigd', 6)->default(DB::raw('CURRENT_TIMESTAMP(6)'));
+            $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));
+            $table->dateTime('Datumgewijzigd', 6)->nullable()->default(DB::raw('NOW(6)'));
             $table->foreign('PatientId')->references('Id')->on('Patient');
         });
     }

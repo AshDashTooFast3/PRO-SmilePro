@@ -11,7 +11,9 @@ class Gebruiker extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'Gebruiker';
+
     protected $primaryKey = 'Id'; // ← add this
+
     public $timestamps = false;
 
     protected $fillable = [
@@ -40,6 +42,18 @@ class Gebruiker extends Authenticatable
     public function personen()
     {
         return $this->hasMany(Persoon::class, 'GebruikerId');
+    }
+
+    public function patient()
+    {
+        return $this->hasOneThrough(
+            Patient::class,
+            Persoon::class,
+            'GebruikerId', // Persoon.GebruikerId
+            'PersoonId',   // Patient.PersoonId
+            'Id',          // Gebruiker.Id
+            'Id'           // Persoon.Id
+        );
     }
 
     // Laravel will use this column for password verification

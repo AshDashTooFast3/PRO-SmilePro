@@ -18,15 +18,17 @@ class DatabaseSeeder extends Seeder
 
         Gebruiker::factory()->create([
             'Gebruikersnaam' => 'Praktijkmanagement',
-            'Email' => 'Praktijkmanagement@smilepro.nl',
-            'Wachtwoord'=> bcrypt('achraf1532'),
+            'Email' => 'praktijkmanagement@smilepro.nl',
+            'Wachtwoord' => bcrypt('achraf123'),
             'RolNaam' => 'Praktijkmanagement',
         ]);
-       $this->call(AfspraakSeeder::class);
-       $this->call(PersoonSeeder::class);
-       $this->call(PatientSeeder::class);
-       $this->call(MedewerkerSeeder::class);
-       $this->call(CommunicatieSeeder::class);
-
+        $this->call(AfspraakSeeder::class);
+        $this->call(PersoonSeeder::class);
+        $this->call(PatientSeeder::class);
+        $this->call(MedewerkerSeeder::class);
+        $this->call(CommunicatieSeeder::class);
+        $this->call(BehandelingSeeder::class);
+        $this->call(FactuurSeeder::class);
+        
     }
 }

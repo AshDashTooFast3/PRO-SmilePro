@@ -2,13 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PraktijkmanagementController;
+use App\Http\Controllers\patientenController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+
 
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'index'])
     ->name('praktijkmanagement.index')
@@ -19,10 +21,18 @@ Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class
     ->name('praktijkmanagement.berichten')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+Route::get('/facturenOverzichtPatient', [patientenController::class, 'facturenPatient'])
+    ->name('facturenOverzichtPatient.index')
+    ->middleware(['auth', 'role:patient']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/overzicht-patienten', [patientenController::class, 'index'])
+    ->name('overzicht-patienten.index')
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

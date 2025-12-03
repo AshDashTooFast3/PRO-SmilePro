@@ -1,0 +1,35 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Patient;
+use App\Models\Behandeling;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Factuur>
+ */
+class FactuurFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'PatientId' => Patient::factory(),
+            'BehandelingId' => Behandeling::factory(),
+            'Nummer' => $this->faker->unique()->bothify('FCT-#####'),
+            'Datum' => $this->faker->date(),
+            'Bedrag' => $this->faker->randomFloat(2, 50, 1000),
+            'Status' => $this->faker->randomElement(['Verzonden', 'Niet-Verzonden', 'Betaald', 'Onbetaald']),
+            'Isactief' => $this->faker->boolean(),
+            'Opmerking' => $this->faker->optional()->sentence(),
+            'Datumaangemaakt' => $this->faker->dateTime(),
+            'Datumgewijzigd' => $this->faker->optional()->dateTime(),
+
+        ];
+    }
+}

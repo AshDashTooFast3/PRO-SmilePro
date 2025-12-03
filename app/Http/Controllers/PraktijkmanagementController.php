@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Communicatie;
 use Illuminate\Http\Request;
-use App\Models\Bericht;
+use \App\Models\Afspraken;
 
 class PraktijkmanagementController extends Controller
 {
@@ -14,7 +14,7 @@ class PraktijkmanagementController extends Controller
     }
 
     public function index() {
-        $aantalAfspraken = \App\Models\Afspraken::query()->getModel()->getAfsprakenCount();
+        $aantalAfspraken = Afspraken::getAfsprakenCount();
         
         return view("praktijkmanagement.index", [
             "title"=> "Praktijkmanagement Dashboard",
@@ -24,9 +24,11 @@ class PraktijkmanagementController extends Controller
     
     public function berichten() {
 
+        $berichten = $this->communicatie->getAllCommunicatie();
+
         return view("praktijkmanagement.berichten", [
             "title"=> "Berichten Overzicht",
-            "berichten" => ""
+            "berichten" => $berichten
         ]);
     }
 }

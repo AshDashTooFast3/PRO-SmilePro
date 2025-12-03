@@ -29,4 +29,9 @@ class Persoon extends Model
     {
         return $this->belongsTo(Gebruiker::class, 'GebruikerId');
     }
+
+    public function patient()
+    {
+        return $this->hasOne(Patient::class, 'PersoonId', 'Id');
+    }
 }
