@@ -7,9 +7,7 @@
 
     <div style="max-width: 700px; margin: 0 auto; font-family: Arial, sans-serif; color: #fff; background-color: #0f172a; min-height: 100vh; padding-bottom: 40px;">
 
-        <h2 style="text-align: center; margin-bottom: 30px; color: #fff;">Facturen Overzicht</h2>
-
-        @foreach($facturen as $factuur)
+        @forelse($facturen as $factuur)
             <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 25px; border-radius: 6px;">
 
                 <!-- Header -->
@@ -46,7 +44,12 @@
                 </div>
 
             </div>
-        @endforeach
+
+            @empty
+                <div style="margin: 50px; border: 1px solid #ccc; padding: 20px; border-radius: 6px; text-align: center; background-color: #1e293b;">
+                    <p style="margin: 0; color: #fff;">Geen facturen gevonden.</p>
+                </div>
+        @endforelse
 
     </div>
 </x-app-layout>
