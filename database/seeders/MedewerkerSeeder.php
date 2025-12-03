@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Medewerker;
 
@@ -13,6 +12,7 @@ class MedewerkerSeeder extends Seeder
      */
     public function run(): void
     {
-        Medewerker::factory()->count(1)->create();
+        // Maak 20 medewerkers met realistische data
+        Medewerker::factory()->count(20)->create();
     }
 }

@@ -3,10 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PraktijkmanagementController;
 use App\Http\Controllers\patientenController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\MedewerkerOverzichtController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +22,10 @@ Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class
 Route::get('/facturenOverzichtPatient', [patientenController::class, 'facturenPatient'])
     ->name('facturenOverzichtPatient.index')
     ->middleware(['auth', 'role:patient']);
+    
+Route::get('/medewerkers', [MedewerkerOverzichtController::class, 'index'])
+     ->middleware(['auth', 'role:praktijkmanagement'])
+     ->name('medewerkers.overzicht');
 
 
 Route::get('/dashboard', function () {
@@ -39,5 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

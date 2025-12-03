@@ -19,11 +19,40 @@ class MedewerkerFactory extends Factory
         return [
             'PersoonId' => \App\Models\Persoon::factory(),
             'Nummer' => $this->faker->unique()->numerify('M####'),
-            'Medewerkertype' => $this->faker->randomElement(['Tandarts', 'Assistent', 'Mondhygiënist']),
-            'Specialisatie' => $this->faker->optional()->word(),
+
+            // Alleen de rollen die relevant zijn voor een tandartspraktijk
+            'Medewerkertype' => $this->faker->randomElement([
+                'Tandarts',
+                'Mondhygiënist',
+                'Assistent',
+                'Praktijkmanagement'
+            ]),
+
+            // Realistische specialisaties
+            'Specialisatie' => $this->faker->optional()->randomElement([
+                'Orthodontie',
+                'Implantologie',
+                'Kinderzorg',
+                'Preventie',
+                'Chirurgie',
+                'Angstbegeleiding',
+                'Parodontologie'
+            ]),
+
             'Beschikbaarheid' => $this->faker->randomElement(['Fulltime', 'Parttime']),
             'Isactief' => true,
-            'Opmerking' => $this->faker->optional()->sentence(),
+
+            // Realistische opmerkingen
+            'Opmerking' => $this->faker->optional()->randomElement([
+                'Werkt op maandag en woensdag',
+                'Gespecialiseerd in angstpatiënten',
+                'Fulltime beschikbaar',
+                'Ondersteunt bij baliewerk',
+                'Sinds 2015 werkzaam in de praktijk',
+                'Ervaring met implantaten en kronen',
+                'Begeleidt stagiaires en nieuwe medewerkers'
+            ]),
+
             'Datumaangemaakt' => now(),
             'Datumgewijzigd' => now(),
         ];

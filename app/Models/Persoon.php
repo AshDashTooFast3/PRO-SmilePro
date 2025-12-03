@@ -34,4 +34,9 @@ class Persoon extends Model
     {
         return $this->hasOne(Patient::class, 'PersoonId', 'Id');
     }
+    public function medewerker()
+{
+    return $this->hasOne(MedewerkerOverzichtModel::class, 'PersoonId', 'Id');
+}
+
 }
