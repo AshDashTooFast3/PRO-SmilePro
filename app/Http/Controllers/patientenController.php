@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class patientenController extends Controller
 {
@@ -25,7 +27,8 @@ class patientenController extends Controller
     // Haal de patient via de relaties
     $patient = $gebruiker->patient;
 
-    if (! $patient) {
+    if (! $patient->factuur) {
+        Log::info('Geen facturen beschikbaar.');
         return view('patienten.factuurPatient', ['facturen' => [], 'title' => 'Mijn Facturen']);
     }
 
