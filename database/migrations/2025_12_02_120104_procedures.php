@@ -75,10 +75,6 @@ return new class extends Migration
 
 
     ');
-<<<<<<< HEAD
-
-=======
->>>>>>> 7675f07f206284464aebcb03b784dcba0a7af1de
     }
 
     /**

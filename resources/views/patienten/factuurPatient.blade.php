@@ -8,7 +8,7 @@
     <div style="max-width: 700px; margin: 0 auto; font-family: Arial, sans-serif; color: #fff; background-color: #0f172a; min-height: 100vh; padding-bottom: 40px;">
 
         @forelse($facturen as $factuur)
-            <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 25px; border-radius: 6px;">
+            <div style="border: 1px solid #ccc; padding: 20px; margin: 25px; border-radius: 6px;">
 
                 <!-- Header -->
                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
