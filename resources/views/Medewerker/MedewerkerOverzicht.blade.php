@@ -15,6 +15,7 @@
 
                 <div class="p-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div class="container">
+                        <h1 class="mb-6 text-center text-3xl font-bold text-white dark:text-gray-100">Medewerker Overzicht</h1>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-700 text-white">
