@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/overzicht-patienten', [patientenController::class, 'index'])
+Route::get('/overzicht-patienten', [patientenController::class, 'overzicht'])
     ->name('overzicht-patienten.index')
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
 
