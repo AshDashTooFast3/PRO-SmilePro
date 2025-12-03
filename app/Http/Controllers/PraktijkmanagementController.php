@@ -26,7 +26,7 @@ class PraktijkmanagementController extends Controller
     
     public function berichten() {
         $berichten = $this->communicatie->getAllCommunicatie();
-        Log::info('Berichten opgehaald', ['Aantal berichten:' => $berichten]);
+        Log::info('Berichten opgehaald', ['Aantal berichten:' => count($berichten)]);
         
         return view("praktijkmanagement.berichten", [
             "title"=> "Berichten Overzicht",
