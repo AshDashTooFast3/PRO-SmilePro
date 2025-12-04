@@ -10,12 +10,7 @@ class MedewerkerOverzichtController extends Controller
 {
     public function index()
     {
-        // Toggle hier: zet op true of false om scenario te simuleren
-        $toonMedewerkers = false;
-
-        $medewerkers = $toonMedewerkers
-            ? MedewerkerOverzichtModel::with('persoon')->get()
-            : collect(); // lege collectie → unhappy scenario
+        $medewerkers = MedewerkerOverzichtModel::with('persoon')->get();
 
         if ($medewerkers->isEmpty()) {
             Log::info('Geen medewerkers beschikbaar.');
