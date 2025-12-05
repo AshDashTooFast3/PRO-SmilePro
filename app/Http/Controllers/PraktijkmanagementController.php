@@ -15,9 +15,15 @@ class PraktijkmanagementController extends Controller
     }
 
     public function index() {
+
         $aantalAfspraken = Afspraken::getAfsprakenCount();
-        Log::info('Aantal afspraken opgehaald', ['Aantal afspraken:' => $aantalAfspraken]);
-        
+
+        if($aantalAfspraken > 0) {
+            Log::info('Aantal afspraken opgehaald: ' . $aantalAfspraken);
+        } else {
+            Log::info('Geen afspraken gevonden');
+        }
+
         return view("praktijkmanagement.index", [
             "title"=> "Praktijkmanagement Dashboard",
             "aantalAfspraken" => $aantalAfspraken
@@ -25,8 +31,14 @@ class PraktijkmanagementController extends Controller
     }
     
     public function berichten() {
+
         $berichten = $this->communicatie->getAllCommunicatie();
-        Log::info('Berichten opgehaald', ['Aantal berichten:' => count($berichten)]);
+
+        if ($berichten > 0) {
+            Log::info('Berichten opgehaald', ['Aantal berichten:' => count($berichten)]);
+        } else {
+            Log::info('Geen berichten opgehaald');
+        }
         
         return view("praktijkmanagement.berichten", [
             "title"=> "Berichten Overzicht",

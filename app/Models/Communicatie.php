@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 
 
 class Communicatie extends Model
@@ -26,9 +27,19 @@ class Communicatie extends Model
         'Datumgewijzigd',
     ];
 
+    //pakt alle berichten en eventuele errors
+
     public function getAllCommunicatie()
     {
-        return DB::select("CALL sp_GetAllCommunicatie()");
+        try {
+            $result = DB::select('CALL sp_GetAllCommunicatie()');
+
+            return $result;
+
+        } catch (\Exception $e) {
+            Log::error('Fout in getCommunicatie: '.$e->getMessage());
+            return [];
+        }
     }
 
     // A Bericht belongs to a Patient
