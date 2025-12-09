@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\Factuur;
 class FactuurSeeder extends Seeder
 {
     /**
@@ -12,6 +12,6 @@ class FactuurSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Factuur::factory()->count(5)->create();
+        Factuur::factory()->count(1)->create();
     }
 }

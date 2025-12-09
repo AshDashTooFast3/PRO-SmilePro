@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Behandeling;
 
 class BehandelingSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class BehandelingSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Behandeling::factory()->count(10)->create();
+        Behandeling::factory()->count(1)->create();
     }
 }

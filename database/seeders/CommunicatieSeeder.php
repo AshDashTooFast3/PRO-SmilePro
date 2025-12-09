@@ -13,6 +13,6 @@ class CommunicatieSeeder extends Seeder
      */
     public function run(): void
     {
-        Communicatie::factory()->count(6)->create();
+        Communicatie::factory()->count(1)->create();
     }
 }

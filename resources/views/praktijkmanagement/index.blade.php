@@ -32,6 +32,25 @@
                     </strong>
                     <br>
                 </div>
+                <div class="p-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 text-gray-100 text-2xl">
+                    <strong>
+                        <p class="text-white p-4">
+                            Omzet tot nu toe:
+                            @if ($omzet > 0)
+                                €{{ $omzet->TotaleOmzet }}
+                            @else
+                                <span
+                                    style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #ffa600ff; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">
+                                    0
+                                </span>
+                                <span style="margin-left: 10px; color: #ffa600ff;">
+                                    er is nog geen omzet gegenereerd
+                                </span>
+                            @endif
+                        </p>
+                    </strong>
+                    <br>
+                </div>
             </div>
         </div>
     </div>

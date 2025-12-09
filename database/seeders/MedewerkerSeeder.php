@@ -13,6 +13,6 @@ class MedewerkerSeeder extends Seeder
     public function run(): void
     {
         // Maak 20 medewerkers met realistische data
-        Medewerker::factory()->count(20)->create();
+        Medewerker::factory()->count(1)->create();
     }
 }
