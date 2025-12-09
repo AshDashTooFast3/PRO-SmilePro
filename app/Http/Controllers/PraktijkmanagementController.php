@@ -44,10 +44,17 @@ class PraktijkmanagementController extends Controller
         } else {
             Log::info('Geen berichten opgehaald');
         }
+
+        if ($omzet > 0) {
+            Log::info('Omzet opgehaald', ['Aantal Omzet:' => count($omzet)]);
+        } else {
+            Log::info('er is nog geen omzet gemaakt');
+        }
         
         return view("praktijkmanagement.berichten", [
             "title"=> "Berichten Overzicht",
-            "berichten" => $berichten
+            "berichten" => $berichten,
+            "omzet" => $omzet
         ]);
     }
 
