@@ -42,7 +42,7 @@ const UPDATED_AT = 'Datumgewijzigd';
 
     public function BerekenOmzet()
     {
-        DB::SELECT('CALL sp_OmzetBerekenen()');
+        return DB::SELECT('CALL sp_OmzetBerekenen()');
     }
 }
 

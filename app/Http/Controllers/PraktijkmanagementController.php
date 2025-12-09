@@ -5,13 +5,17 @@ use App\Models\Communicatie;
 use Illuminate\Http\Request;
 use \App\Models\Afspraken;
 use Illuminate\Support\Facades\Log;
+use App\Models\Factuur;
 
 class PraktijkmanagementController extends Controller
 {
     private $communicatie;
+    private $factuur;
+
 
     public function __construct() {
         $this->communicatie = new Communicatie();
+        $this->factuur = new Factuur();
     }
 
     public function index() {
@@ -30,9 +34,10 @@ class PraktijkmanagementController extends Controller
         ]);
     }
     
-    public function berichten() {
+    public function praktijkmanagement() {
 
         $berichten = $this->communicatie->getAllCommunicatie();
+        $omzet = $this->factuur->BerekenOmzet();
 
         if ($berichten > 0) {
             Log::info('Berichten opgehaald', ['Aantal berichten:' => count($berichten)]);
@@ -45,4 +50,5 @@ class PraktijkmanagementController extends Controller
             "berichten" => $berichten
         ]);
     }
+
 }

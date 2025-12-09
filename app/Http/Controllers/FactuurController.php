@@ -12,13 +12,5 @@ class FactuurController extends Controller
     public function __construct() {
         $this->factuur = new Factuur();
     }
-
-    public function omzet(){
-        $omzet = $this->factuur->BerekenOmzet();
-
-        return view("praktijkmanagement.index", 
-        [
-            "omzet" => $omzet
-        ]);
-    }
+    
 }

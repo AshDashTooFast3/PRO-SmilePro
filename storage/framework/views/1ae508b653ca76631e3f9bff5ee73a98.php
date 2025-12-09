@@ -47,8 +47,8 @@
                     <strong>
                         <p class="text-white p-4">
                             Omzet tot nu toe:
-                            <?php if($aantalAfspraken > 0): ?>
-                                €<?php echo e($aantalAfspraken); ?>
+                            <?php if($omzet > 0): ?>
+                                €<?php echo e($omzet->TotaleOmzet); ?>
 
                             <?php else: ?>
                                 <span
