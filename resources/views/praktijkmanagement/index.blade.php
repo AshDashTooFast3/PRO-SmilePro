@@ -16,7 +16,7 @@
                     <strong>
                         <p class="text-white p-4">
                             Aantal afspraken gemaakt:
-                            @if ($aantalAfspraken > 0)
+                            @if (!empty($aantalAfspraken) && $aantalAfspraken > 0)
                             <span style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #4F46E5; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">
                                 {{ $aantalAfspraken }}
                             </span>
@@ -36,8 +36,8 @@
                     <strong>
                         <p class="text-white p-4">
                             Omzet tot nu toe:
-                            @if ($omzet > 0)
-                                €{{ $omzet->TotaleOmzet }}
+                            @if (!empty($omzet) && $omzet[0]->TotaleOmzet > 0)
+                                €{{ $omzet[0]->TotaleOmzet }}
                             @else
                                 <span
                                     style="display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #ffa600ff; color: #fff; text-align: center; line-height: 40px; font-weight: bold; margin-left: 10px;">

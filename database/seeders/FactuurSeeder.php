@@ -12,6 +12,6 @@ class FactuurSeeder extends Seeder
      */
     public function run(): void
     {
-        Factuur::factory()->count(1)->create();
+        Factuur::factory()->count(5)->create();
     }
 }

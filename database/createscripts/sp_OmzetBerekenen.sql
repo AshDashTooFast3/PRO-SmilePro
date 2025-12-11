@@ -10,7 +10,7 @@ BEGIN
 
     SELECT SUM(Bedrag) AS TotaleOmzet
     FROM Factuur
-    WHERE Isactief = 1;
+    WHERE Status = 'Betaald';
 
 END$$
 

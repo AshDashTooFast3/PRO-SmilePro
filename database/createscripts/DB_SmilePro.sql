@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS SmilePro;
-
-CREATE DATABASE SmilePro;
+-- DROP DATABASE IF EXISTS SmilePro;
+-- 
+-- CREATE DATABASE SmilePro;
 
 USE SmilePro;
 
@@ -176,11 +176,11 @@ CREATE TABLE Feedback (
 
 -- Gebruiker
 INSERT INTO Gebruiker (Id,Gebruikersnaam,Wachtwoord,RolNaam,Ingelogd,Uitgelogd,Isactief,Email,Opmerking,Datumaangemaakt,Datumgewijzigd) VALUES
-(1,'tandarts','achraf1532','Tandarts',SYSDATE(6),SYSDATE(6),1,'tandarts@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
-(2,'mondhygiënist','achraf1532','Mondhygiënist',SYSDATE(6),SYSDATE(6),1,'mondhygiënist@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
-(3,'assistent','achraf1532','Assistent',SYSDATE(6),SYSDATE(6),1,'assistent@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
-(4,'praktijkmanagement','achraf1532','Praktijkmanagement',SYSDATE(6),SYSDATE(6),1,'praktijkmanagement@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
-(5,'patient','achraf1532','Patient',SYSDATE(6),SYSDATE(6),1,'patient@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6));
+(1,'tandarts','achraf123','Tandarts',SYSDATE(6),SYSDATE(6),1,'tandarts@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
+(2,'mondhygiënist','achraf123','Mondhygiënist',SYSDATE(6),SYSDATE(6),1,'mondhygiënist@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
+(3,'assistent','achraf123','Assistent',SYSDATE(6),SYSDATE(6),1,'assistent@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
+(4,'praktijkmanagement','achraf123','Praktijkmanagement',SYSDATE(6),SYSDATE(6),1,'praktijkmanagement@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6)),
+(5,'patient','achraf123','Patient',SYSDATE(6),SYSDATE(6),1,'patient@smilepro.nl',NULL,SYSDATE(6),SYSDATE(6));
 -- Persoon
 INSERT INTO Persoon (Id,GebruikerId,Voornaam,Tussenvoegsel,Achternaam,Geboortedatum,Isactief,Opmerking,Datumaangemaakt,Datumgewijzigd) VALUES
 (1,1,'Jan',NULL,'Jansen','1980-04-12',1,NULL,SYSDATE(6),SYSDATE(6)),

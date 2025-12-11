@@ -73,12 +73,32 @@ return new class extends Migration
             INNER JOIN Persoon PER_PAT ON PAT.PersoonId = PER_PAT.Id;
         END;
 
+        
 
     ');
+        DB::unprepared('
+        DROP PROCEDURE IF EXISTS sp_OmzetBerekenen;
+
+        CREATE PROCEDURE sp_OmzetBerekenen()
+
+        BEGIN
+            
+        SELECT SUM(Bedrag) AS TotaleOmzet
+
+            FROM Factuur
+            WHERE Status = \'Betaald\';
+
+        END;
+');
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void {}
+    public function down(): void {
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_getVolledigeNaamPatienten');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAfsprakenCount');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllCommunicatie');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_OmzetBerekenen');
+    }
 };
