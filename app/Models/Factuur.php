@@ -42,9 +42,9 @@ class Factuur extends Model
     }
 
     /*Probeert om de sp_OmzetBerekenen in de database aan te roepen, 
-    anders geeft hij een error en stuurt hij een lege array terug en logt de error in laravel.log
+    anders geeft hij een error en stuurt hij een lege array terug en logt de error in storage/logs/laravel.log
     */
-    
+
     public function BerekenOmzet()
     {
         try {
