@@ -42,13 +42,13 @@ class Communicatie extends Model
         }
     }
 
-    // A Bericht belongs to a Patient
+    // een bericht hoort bij een patient
     public function patient()
     {
         return $this->belongsTo(Patient::class, 'PatientId');
     }
 
-    // A Bericht belongs to a Medewerker
+    // een bericht hoort bij een medewerker
     public function medewerker()
     {
         return $this->belongsTo(Medewerker::class, 'MedewerkerId');

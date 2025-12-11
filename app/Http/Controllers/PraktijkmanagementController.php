@@ -36,7 +36,7 @@ class PraktijkmanagementController extends Controller
 
         //log voor het bedrag van de omzet
           if ($omzet > 0) {
-            Log::info('Omzet opgehaald', ['Berekende omzet:' => count($omzet) . '€']);
+            Log::info('Omzet opgehaald', ['Totaal omzet bedrag opgehaald:', $omzet]);
         } else {
             Log::info('er is nog geen omzet gemaakt');
         }
