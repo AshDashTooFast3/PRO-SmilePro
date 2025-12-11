@@ -11,11 +11,21 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ _('Dashboard') }}
-                    </x-nav-link>
-                </div>
+
+                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement']))
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('praktijkmanagement.index')" :active="request()->routeIs('praktijkmanagement.index')">
+                            {{ _('Praktijkmanagement') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('praktijkmanagement.berichten')"
+                            :active="request()->routeIs('praktijkmanagement.berichten')">
+                            {{ _('Berichten') }}
+                        </x-nav-link>
+                    </div>
+                @endif
 
                 @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Patient']))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -29,21 +39,6 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('overzicht-patienten.index')" :active="request()->routeIs('overzicht-patienten.index')">
                             {{ _('patienten-overzicht') }}
-                        </x-nav-link>
-                    </div>
-                @endif
-
-
-                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement']))
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('praktijkmanagement.index')" :active="request()->routeIs('praktijkmanagement.index')">
-                            {{ _('Praktijkmanagement') }}
-                        </x-nav-link>
-                    </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('praktijkmanagement.berichten')" :active="request()->routeIs('praktijkmanagement.berichten')">
-                            {{ _('Berichten') }}
                         </x-nav-link>
                     </div>
                 @endif
