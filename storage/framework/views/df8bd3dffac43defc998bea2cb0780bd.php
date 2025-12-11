@@ -95,7 +95,7 @@
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes(['href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('facturenOverzichtPatient.index')),'active' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(request()->routeIs('facturenOverzichtPatient.index'))]); ?>
-                            <?php echo e(_('Mijn facturen')); ?>
+                            <?php echo e(_('Mijn Facturen')); ?>
 
                          <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -122,7 +122,7 @@
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes(['href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('overzicht-patienten.index')),'active' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(request()->routeIs('overzicht-patienten.index'))]); ?>
-                            <?php echo e(_('patienten-overzicht')); ?>
+                            <?php echo e(_('Patienten Overzicht')); ?>
 
                          <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
