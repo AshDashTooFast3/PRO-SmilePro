@@ -48,7 +48,7 @@ class PraktijkmanagementController extends Controller
         ]);
     }
     
-    public function praktijkmanagement() {
+    public function berichten() {
 
         //haalt alle berichten op
         $berichten = $this->communicatie->getAllCommunicatie();
