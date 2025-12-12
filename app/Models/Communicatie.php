@@ -34,6 +34,11 @@ class Communicatie extends Model
         try {
             $result = DB::select('CALL sp_GetAllCommunicatie()');
 
+            if ($result === null) {
+                Log::warning('sp_GetAllCommunicatie retourneerde null.');
+                return [];
+            }
+            
             return $result;
 
         } catch (\Exception $e) {

@@ -50,6 +50,11 @@ class Factuur extends Model
         try {
             $result = DB::select('CALL sp_OmzetBerekenen()');
 
+            if ($result === null) {
+                Log::warning('sp_OmzetBerekenen retourneerde null.');
+                return [];
+            }
+
             return $result;
 
         } catch (\Exception $e) {
