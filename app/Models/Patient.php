@@ -29,11 +29,13 @@ class Patient extends Model
 
     // A Patient belongs to a Persoon
 
-    public static function getVolledigeNaamPatienten() {
+    public static function getVolledigeNaamPatienten() 
+    {
         return DB::select('CALL sp_getVolledigeNaamPatienten()');
     }
 
-    public static function getPatientFactuur($patientId) {
+    public static function getPatientFactuur($patientId) 
+    {
         return DB::select('CALL sp_getPatientFactuur(?)', [$patientId]);
     }
 

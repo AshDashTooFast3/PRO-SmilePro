@@ -27,7 +27,7 @@ class GebruikerFactory extends Factory
             'Gebruikersnaam'   => $this->faker->userName(),
             'Wachtwoord'       => static::$wachtwoord ??= Hash::make('wachtwoord'),
             'Email'            => $this->faker->unique()->safeEmail(),
-            'RolNaam'          => 'patient',
+            'RolNaam'          => 'gebruiker',
             'Ingelogd'         => now(),
             'Uitgelogd'        => null,
             'Isactief'         => true,

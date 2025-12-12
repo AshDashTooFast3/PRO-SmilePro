@@ -10,6 +10,10 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
+                    <a href="/Patient-toevoegen"
+                        class="float-right inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                         Patiënt toevoegen
+                    </a>
                     <div class="mt-6">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
@@ -50,7 +54,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3"
+                                        <td colspan="8"
                                             class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen
                                             patienten gevonden.</td>
                                     </tr>
