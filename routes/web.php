@@ -19,6 +19,14 @@ Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class
     ->name('praktijkmanagement.berichten')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+Route::get('/praktijkmanagement/createBericht', [PraktijkmanagementController::class, 'createBericht'])
+    ->name('praktijkmanagement.createBericht')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+    
+Route::post('/praktijkmanagement/storeBericht', [PraktijkmanagementController::class, 'storeBericht'])
+    ->name('praktijkmanagement.storeBericht')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 Route::get('/facturenOverzichtPatient', [patientenController::class, 'facturenPatient'])
     ->name('facturenOverzichtPatient.index')
     ->middleware(['auth', 'role:patient']);

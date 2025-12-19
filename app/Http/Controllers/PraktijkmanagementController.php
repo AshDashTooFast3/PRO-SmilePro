@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use \App\Models\Afspraken;
 use Illuminate\Support\Facades\Log;
 use App\Models\Factuur;
+use \App\Models\Medewerker;
+use \App\Models\Patient;
 
 class PraktijkmanagementController extends Controller
 {
@@ -47,7 +49,35 @@ class PraktijkmanagementController extends Controller
             "omzet" => $omzet
         ]);
     }
-    
+
+    public function storeBericht(Request $request) {
+        $validated = $request->validate([
+            'PatientNummer' => 'required|string|max:255',
+            'MedewerkerNummer' => 'required|string|max:255',
+            'Bericht' => 'required|string',
+        ]);
+
+        $this->communicatie->create([
+            'PatientNummer' => $validated['PatientNummer'],
+            'MedewerkerNummer' => $validated['MedewerkerNummer'],
+            'Bericht' => $validated['Bericht'],
+        ]);
+
+        return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol opgeslagen.');
+    }
+
+
+    public function createBericht() {
+        $patienten = Patient::all();
+        $medewerkers = Medewerker::all();
+
+        return view("praktijkmanagement.createBericht", [
+            "title"=> "Nieuw Bericht Aanmaken",
+            "patienten" => $patienten,
+            "medewerkers" => $medewerkers,
+        ]);
+    }
+
     public function berichten() {
 
         //haalt alle berichten op
