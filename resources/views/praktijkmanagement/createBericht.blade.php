@@ -16,7 +16,9 @@
                             <select name="PatientNummer" id="PatientNummer" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required>
                                 <option value="">Selecteer een patiënt</option>
                                 @foreach($patienten as $patient)
-                                    <option value="{{ $patient->PatientNummer }}">{{ $patient->naam }}</option>
+                                    <option value="{{ $patient->Nummer }}">
+                                        {{ $patient->Nummer }} - {{ $patient->Persoon->Voornaam }} {{ $patient->Persoon->Tussenvoegsel }} {{ $patient->Persoon->Achternaam }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -25,7 +27,9 @@
                             <select name="MedewerkerNummer" id="MedewerkerNummer" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required>
                                 <option value="">Selecteer een medewerker</option>
                                 @foreach($medewerkers as $medewerker)
-                                    <option value="{{ $medewerker->MedewerkerNummer }}">{{ $medewerker->naam }}</option>
+                                    <option value="{{ $medewerker->Nummer }}">
+                                        {{ $medewerker->Nummer }} - {{ $medewerker->Persoon->Voornaam }} {{ $medewerker->Persoon->Tussenvoegsel }} {{ $medewerker->Persoon->Achternaam }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
