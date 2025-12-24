@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@tailwindplus/elements": "^1.0.19",
-        "bootstrap": "^5.3.8"
+        "bootstrap": "^5.3.8",
+        "tailwinds": "^0.0.0"
     }
 }

@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\FactuurController;
 use App\Http\Controllers\MedewerkerOverzichtController;
+<<<<<<< HEAD
 use App\Http\Controllers\patientenController;
 use App\Http\Controllers\PraktijkmanagementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BerichtController;
 use Illuminate\Support\Facades\Route;
+=======
+use App\Http\Controllers\AfspraakController;
+>>>>>>> 095a80e (afspraak overzicht voor alle rollen patient rol heeft zijn eigen unieke pagina)
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +41,7 @@ Route::get('/factuur/factuurPatient', [FactuurController::class, 'factuurPatient
     ->name('factuur.factuurPatient')
     ->middleware(['auth', 'role:patient']);
 
+<<<<<<< HEAD
 Route::get('/factuur/create', [FactuurController::class, 'create'])
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
     ->name('factuur.create');
@@ -56,6 +61,11 @@ Route::get('/Patient-toevoegen', [patientenController::class, 'create'])
 Route::post('/Patient-toevoegen-update', [patientenController::class, 'update'])
     ->name('patienten.toevoegen-update')
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
+=======
+    Route::get('/afspraken', [AfspraakController::class, 'index'])
+        ->name('afspraken.index')
+        ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist,patient']);
+>>>>>>> 095a80e (afspraak overzicht voor alle rollen patient rol heeft zijn eigen unieke pagina)
 
 Route::get('/dashboard', function () {
     return view('dashboard');
