@@ -5,6 +5,7 @@ use App\Http\Controllers\PraktijkmanagementController;
 use App\Http\Controllers\patientenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedewerkerOverzichtController;
+use App\Http\Controllers\AfspraakController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,9 @@ Route::get('/medewerkers', [MedewerkerOverzichtController::class, 'index'])
      ->middleware(['auth', 'role:praktijkmanagement'])
      ->name('medewerkers.overzicht');
 
+    Route::get('/afspraken', [AfspraakController::class, 'index'])
+        ->name('afspraken.index')
+        ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist,patient']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
