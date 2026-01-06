@@ -21,7 +21,7 @@
                             <meta http-equiv="refresh" content="3;url={{ route('praktijkmanagement.berichten') }}">
                         </div>
                     @elseif(session('error'))
-                        <div class="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        <div class="mt-4 p-4 bg-red-300 border border-red-400 text-red-900 rounded">
                             {{ session('error') }}
                             <meta http-equiv="refresh" content="3;url={{ route('praktijkmanagement.berichten') }}">
                         </div>

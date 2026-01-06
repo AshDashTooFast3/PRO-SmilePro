@@ -54,22 +54,28 @@ class PraktijkmanagementController extends Controller
 
     public function storeBericht(Request $request)
     {
-        $validated = $request->validate([
-            'Patient' => 'required|string|max:255',
-            'Medewerker' => 'required|string|max:255',
-            'Bericht' => 'required|string',
-        ]);
+        $patient = Patient::find($request->input('Patient'));
 
-        $this->communicatie->create([
-            'PatientId' => $validated['Patient'],
-            'MedewerkerId' => $validated['Medewerker'],
-            'Bericht' => $validated['Bericht'],
-            'VerzondenDatum' => now(),
-            'Isactief' => 0,
+        if ($patient->Isactief == 0) {
+            return redirect()->route('praktijkmanagement.createBericht')->with('error', 'De geselecteerde patiënt is geen patient meer.');
+        } else {
+            $validated = $request->validate([
+                'Patient' => 'required|string|max:255',
+                'Medewerker' => 'required|string|max:255',
+                'Bericht' => 'required|string',
+            ]);
 
-        ]);
+            $this->communicatie->create([
+                'PatientId' => $validated['Patient'],
+                'MedewerkerId' => $validated['Medewerker'],
+                'Bericht' => $validated['Bericht'],
+                'VerzondenDatum' => now(),
+                'Isactief' => 0,
 
-        return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol aangemaakt.');
+            ]);
+
+            return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol aangemaakt.');
+        }
     }
 
     public function createBericht()
