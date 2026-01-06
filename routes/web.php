@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FactuurController;
 use App\Http\Controllers\MedewerkerOverzichtController;
 use App\Http\Controllers\patientenController;
 use App\Http\Controllers\PraktijkmanagementController;
@@ -18,13 +19,20 @@ Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class
     ->name('praktijkmanagement.berichten')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
-Route::get('/facturenOverzichtPatient', [patientenController::class, 'facturenPatient'])
+Route::get('/facturenOverzichtPatient', [FactuurController::class, 'facturenPatient'])
     ->name('facturenOverzichtPatient.index')
     ->middleware(['auth', 'role:patient']);
 
+Route::post('/factuur', [FactuurController::class, 'factuurmaken'])
+    ->name('factuur.factuurmaken')
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
+
+Route::post('/factuur/create', [FactuurController::class, 'create'])
+    ->name('factuur.create');
+
 Route::get('/medewerkers', [MedewerkerOverzichtController::class, 'index'])
-        ->middleware(['auth', 'role:praktijkmanagement'])
-        ->name('medewerkers.overzicht');
+    ->middleware(['auth', 'role:praktijkmanagement'])
+    ->name('medewerkers.overzicht');
 
 Route::get('/Patient-toevoegen', [patientenController::class, 'create'])
     ->name('patienten.toevoegen')

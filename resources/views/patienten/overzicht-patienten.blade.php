@@ -12,7 +12,7 @@
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
                     <a href="/Patient-toevoegen"
                         class="float-right inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                         Patiënt toevoegen
+                        Patiënt toevoegen
                     </a>
                     <div class="mt-6">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -29,34 +29,46 @@
                                         Medischdossier</th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        opmerking</th>
+                                        Factuur toesturen</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 @forelse($patienten as $patient)
                                     <tr>
-                                        <td
-                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                            {{ $patient->Nummer }}
-                                        </td>
-                                        <td
-                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                            {{ $patient->Naam }}
-                                        </td>
-                                        <td
-                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                            {{ $patient->MedischDossier }}
-                                        </td>
-                                        <td
-                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                            {{ $patient->Opmerking }}
-                                        </td>
+                                        <form action="{{ route('factuur.factuurmaken') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="patient_id" value="{{ $patient->PatientId }}">
+
+                                            <td
+                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                                {{ $patient->Nummer }}
+                                            </td>
+
+                                            <td
+                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                                {{ $patient->Naam }}
+                                            </td>
+
+                                            <td
+                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                                {{ $patient->MedischDossier }}
+                                            </td>
+
+                                            <td
+                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                                <button type="submit"
+                                                    class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                    Factuur maken
+                                                </button>
+                                            </td>
+                                        </form>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="8"
-                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen
-                                            patienten gevonden.</td>
+                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">
+                                            Geen patienten gevonden.
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>
