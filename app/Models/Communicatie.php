@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
 
 class Communicatie extends Model
 {
     use HasFactory, Notifiable;
+
     protected $table = 'Communicatie';
 
     public $timestamps = false;
@@ -27,22 +27,28 @@ class Communicatie extends Model
         'Datumgewijzigd',
     ];
 
-    //pakt alle berichten en eventuele errors
+    // pakt alle berichten en eventuele errors
 
     public function getAllCommunicatie()
     {
         try {
             $result = DB::select('CALL sp_GetAllCommunicatie()');
 
-            if ($result === null) {
+            if (is_null($result)) {
                 Log::warning('sp_GetAllCommunicatie retourneerde null.');
+
+                return [];
+            } elseif (empty($result)) {
+                Log::info('sp_GetAllCommunicatie retourneerde een lege array.');
+
                 return [];
             }
-            
+
             return $result;
 
         } catch (\Exception $e) {
             Log::error('Fout in getCommunicatie: '.$e->getMessage());
+
             return [];
         }
     }
@@ -59,4 +65,3 @@ class Communicatie extends Model
         return $this->belongsTo(Medewerker::class, 'MedewerkerId');
     }
 }
-    
