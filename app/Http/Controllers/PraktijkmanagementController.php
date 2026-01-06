@@ -56,17 +56,19 @@ class PraktijkmanagementController extends Controller
     {
         $patient = Patient::find($request->input('Patient'));
 
+        // Kijkt of de patient niet actief is
         if ($patient->Isactief == 0) {
             Log::warning('Probeer bericht aan te maken voor inactieve patiënt', ['PatientId' => $patient->Id]);
-            
+
             return redirect()->route('praktijkmanagement.createBericht')->with('error', 'De geselecteerde patiënt is geen patient meer.');
         } else {
+            // Validatie van de input gegevens voor het bericht
             $validated = $request->validate([
                 'Patient' => 'required|string|max:255',
                 'Medewerker' => 'required|string|max:255',
                 'Bericht' => 'required|string',
             ]);
-
+            // Maakt een nieuw bericht aan in de database met behulp van de gevalideerde gegevens
             $this->communicatie->create([
                 'PatientId' => $validated['Patient'],
                 'MedewerkerId' => $validated['Medewerker'],
@@ -76,14 +78,17 @@ class PraktijkmanagementController extends Controller
 
             ]);
 
+            // Logt het aanmaken van een nieuw bericht
             Log::info('Nieuw bericht aangemaakt', ['PatientId' => $validated['Patient'], 'MedewerkerId' => $validated['Medewerker'], 'Bericht' => $validated['Bericht']]);
 
+            // Stuurt je terug naar de OverzichtBerichten pagina met een succesmelding
             return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol aangemaakt.');
         }
     }
 
     public function createBericht()
     {
+        // Haalt alle patienten en medewerkers op voor de dropdowns
         $patienten = Patient::all();
         $medewerkers = Medewerker::all();
 
