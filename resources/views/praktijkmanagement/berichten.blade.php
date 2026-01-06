@@ -15,6 +15,17 @@
                        class="inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
                         Nieuw Bericht aanmaken
                     </a>
+                    @if(session('success'))
+                        <div class="mt-4 p-4 bg-green-400 border border-green-400 text-green-900 rounded">
+                            {{ session('success') }}
+                            <meta http-equiv="refresh" content="3;url={{ route('praktijkmanagement.berichten') }}">
+                        </div>
+                    @elseif(session('error'))
+                        <div class="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                            {{ session('error') }}
+                            <meta http-equiv="refresh" content="3;url={{ route('praktijkmanagement.berichten') }}">
+                        </div>
+                    @endif
                     <div class="mt-6">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>

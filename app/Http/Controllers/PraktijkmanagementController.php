@@ -69,7 +69,7 @@ class PraktijkmanagementController extends Controller
 
         ]);
 
-        return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol opgeslagen.');
+        return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol aangemaakt.');
     }
 
     public function createBericht()
