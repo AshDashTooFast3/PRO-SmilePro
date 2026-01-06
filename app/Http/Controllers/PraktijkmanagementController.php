@@ -57,6 +57,8 @@ class PraktijkmanagementController extends Controller
         $patient = Patient::find($request->input('Patient'));
 
         if ($patient->Isactief == 0) {
+            Log::warning('Probeer bericht aan te maken voor inactieve patiënt', ['PatientId' => $patient->Id]);
+            
             return redirect()->route('praktijkmanagement.createBericht')->with('error', 'De geselecteerde patiënt is geen patient meer.');
         } else {
             $validated = $request->validate([
@@ -73,6 +75,8 @@ class PraktijkmanagementController extends Controller
                 'Isactief' => 0,
 
             ]);
+
+            Log::info('Nieuw bericht aangemaakt', ['PatientId' => $validated['Patient'], 'MedewerkerId' => $validated['Medewerker'], 'Bericht' => $validated['Bericht']]);
 
             return redirect()->route('praktijkmanagement.berichten')->with('success', 'Bericht succesvol aangemaakt.');
         }
