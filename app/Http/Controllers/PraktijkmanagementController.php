@@ -84,7 +84,7 @@ class PraktijkmanagementController extends Controller
         ]);
     }
 
-    public function berichten()
+    public function OverzichtBerichten()
     {
 
         // haalt alle berichten op

@@ -45,7 +45,7 @@
                             <label for="Bericht" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bericht</label>
                             <textarea name="Bericht" id="Bericht" rows="4" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required></textarea>
                         </div>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">Verzenden</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">Aanmaken</button>
                     </form>
                 </div>
             </div>

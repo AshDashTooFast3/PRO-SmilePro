@@ -15,7 +15,7 @@ Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'i
     ->middleware(['auth', 'role:praktijkmanagement']);
 
 
-Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class, 'berichten'])
+Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class, 'OverzichtBerichten'])
     ->name('praktijkmanagement.berichten')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
