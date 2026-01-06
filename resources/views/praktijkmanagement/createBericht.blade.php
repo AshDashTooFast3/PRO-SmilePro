@@ -12,23 +12,31 @@
                     <form method="POST" action="{{ route('praktijkmanagement.storeBericht') }}">
                         @csrf
                         <div class="mb-4">
-                            <label for="PatientNummer" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Patientnummer</label>
-                            <select name="PatientNummer" id="PatientNummer" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required>
+                            <label for="Patient" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Patient:</label>
+                            <select name="Patient" id="Patient" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required>
                                 <option value="">Selecteer een patiënt</option>
                                 @foreach($patienten as $patient)
-                                    <option value="{{ $patient->Nummer }}">
-                                        {{ $patient->Nummer }} - {{ $patient->Persoon->Voornaam }} {{ $patient->Persoon->Tussenvoegsel }} {{ $patient->Persoon->Achternaam }}
+                                    <option value="{{ $patient->Id }}">
+                                       {{ $patient->Id }} - 
+                                       {{ $patient->Persoon->Voornaam }} 
+                                       {{ $patient->Persoon->Tussenvoegsel }} 
+                                       {{ $patient->Persoon->Achternaam }}
+                                       {{ $patient->Nummer }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="MedewerkerNummer" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Medewerkernummer</label>
-                            <select name="MedewerkerNummer" id="MedewerkerNummer" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required>
+                            <label for="Medewerker" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Medewerker:</label>
+                            <select name="Medewerker" id="Medewerker" class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" required>
                                 <option value="">Selecteer een medewerker</option>
                                 @foreach($medewerkers as $medewerker)
-                                    <option value="{{ $medewerker->Nummer }}">
-                                        {{ $medewerker->Nummer }} - {{ $medewerker->Persoon->Voornaam }} {{ $medewerker->Persoon->Tussenvoegsel }} {{ $medewerker->Persoon->Achternaam }}
+                                    <option value="{{ $medewerker->Id }}">
+                                        {{ $medewerker->Id }} - 
+                                        {{ $medewerker->Persoon->Voornaam }} 
+                                        {{ $medewerker->Persoon->Tussenvoegsel }} 
+                                        {{ $medewerker->Persoon->Achternaam }} 
+                                        {{ $medewerker->Nummer }}
                                     </option>
                                 @endforeach
                             </select>
