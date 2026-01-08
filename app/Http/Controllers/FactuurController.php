@@ -60,14 +60,7 @@ class FactuurController extends Controller
 
 public function create(Request $request)
 {
-    $request->validate([
-        'Patient_id'   => 'required|integer',
-        'behandeling'  => 'required|string',
-        'omschrijving' => 'required|string',
-        'datum'        => 'required|date',
-        'tijd'         => 'required',
-    ]);
-
+    
     $prijzen = [
         'Controles' => 50.00,
         'Vullingen' => 150.00,
@@ -79,17 +72,17 @@ public function create(Request $request)
     if (!array_key_exists($request->behandeling, $prijzen)) {
         abort(400, 'Onbekende behandeling');
     }
-
+    
     Factuur::create([
-        'patientId'  => $request->patient_id,
-        'behandeling' => $request->behandeling,
-        'omschrijving'=> $request->omschrijving,
-        'prijs'       => $prijzen[$request->behandeling],
-        'datum'       => $request->datum,
-        'tijd'        => $request->tijd,
-        'status'      => 'concept',
+        'PatientId'  => $request->patient_id,
+        'Behandeling' => $request->behandeling,
+        'Omschrijving'=> $request->omschrijving,
+        'Prijs'       => $prijzen[$request->behandeling],
+        'Datum'       => $request->datum,
+        'Tijd'        => $request->tijd,
+        'Status'      => 'Niet-Verzonden',
     ]);
-
+    
     return redirect()
         ->route('overzicht-patienten.index')
         ->with('success', 'Factuur succesvol aangemaakt');

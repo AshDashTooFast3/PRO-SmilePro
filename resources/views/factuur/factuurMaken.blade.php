@@ -14,7 +14,7 @@
                         Nieuwe factuur aanmaken
                     </h3>
 
-                    <form action="factuur/create" method="POST">
+                    <form action="{{ route('factuur.create') }}" method="POST">
                         @csrf
 
                         <input type="hidden" name="patient_id" value="{{ $patient_id }}">
