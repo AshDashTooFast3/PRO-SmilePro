@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'Voornaam' => 'Achraf',
             'Tussenvoegsel' => 'El',
             'Achternaam' => 'Arrasi',
-            'Geboortedatum' => '2000-01-01',
+            'Geboortedatum' => '2006-08-11',
         ]);
         Patient::factory()->create([
             'PersoonId' => Persoon::where('Voornaam', 'Achraf')
