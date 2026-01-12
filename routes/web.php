@@ -32,8 +32,8 @@ Route::get('/factuur', [FactuurController::class, 'index'])
     ->name('factuur.index')
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
 
-Route::get('/facturenOverzichtPatient', [FactuurController::class, 'facturenPatient'])
-    ->name('facturenOverzichtPatient.index')
+Route::get('/factuur/factuurPatient', [FactuurController::class, 'factuurPatient'])
+    ->name('factuur.factuurPatient')
     ->middleware(['auth', 'role:patient']);
 
 Route::get('/factuur/create', [FactuurController::class, 'create'])

@@ -35,7 +35,7 @@
 
                 @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Patient']))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('facturenOverzichtPatient.index')" :active="request()->routeIs('facturenOverzichtPatient.index')">
+                        <x-nav-link :href="route('factuur.factuurPatient')" :active="request()->routeIs('factuur.factuurPatient')">
                             {{ _('Mijn Facturen') }}
                         </x-nav-link>
                     </div>
@@ -120,14 +120,6 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
-
-        @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Patient']))
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('facturenOverzichtPatient.index')" :active="request()->routeIs('facturenOverzichtPatient.index')">
-                    {{ _('Mijn facturen') }}
-                </x-responsive-nav-link>
-            </div>
-        @endif
 
         @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement', 'Tandarts', 'Assistent', 'mondhygienist']))
             <div class="pt-2 pb-3 space-y-1">

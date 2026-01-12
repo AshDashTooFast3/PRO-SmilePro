@@ -21,7 +21,7 @@ class FactuurController extends Controller
             'facturen' => $facturen,
         ]);
     }
-    public function facturenPatient()
+    public function factuurPatient()
     {
         $gebruiker = Auth::user();
 

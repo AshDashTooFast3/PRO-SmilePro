@@ -25,6 +25,13 @@ class DatabaseSeeder extends Seeder
             'RolNaam' => 'Praktijkmanagement',
         ]);
 
+         Gebruiker::factory()->create([
+            'Gebruikersnaam' => 'Patient',
+            'Email' => 'patient@smilepro.nl',
+            'Wachtwoord' => bcrypt('achraf123'),
+            'RolNaam' => 'Patient',
+        ]);
+
         // Unhappy scenarios testen met deze inactieve gebruiker
         Gebruiker::factory()->create([
             'Gebruikersnaam' => 'Achraf El Arrasi',

@@ -12,7 +12,7 @@
                     @if(session('error'))
                         <div class="mt-4 p-4 bg-red-300 border border-red-400 text-red-900 rounded">
                             {{ session('error') }}
-                            <meta http-equiv="refresh" content="3;url={{ route('praktijkmanagement.createBericht') }}">
+                            <meta http-equiv="refresh" content="5;url={{ route('praktijkmanagement.createBericht') }}">
                         </div>
                     @endif
                     <form method="POST" action="{{ route('praktijkmanagement.storeBericht') }}">
