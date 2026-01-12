@@ -17,6 +17,18 @@
                     <form action="{{ route('factuur.store') }}" method="POST">
                         @csrf
 
+                    @if (session('success'))
+                        <div class="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                            {{ session('success') }}
+                            <meta http-equiv="refresh" content="3">
+                        </div>
+                    @elseif (session('error'))
+                        <div class="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                            {{ session('error') }}
+                            <meta http-equiv="refresh" content="3">
+                        </div>
+                    @endif
+
                         <input type="hidden" name="patient_id" value="{{ $patient_id }}">
                         
                         {{-- Behandeling --}}
@@ -37,19 +49,6 @@
                         </div>
 
                         <input type="hidden" name="behandeling" id="behandelingInput" value="{{ $behandelingen->first()->Behandelingtype }}">
-
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const select = document.querySelector('select[name="behandeling_id"]');
-                                const input = document.getElementById('behandelingInput');
-                                select.addEventListener('change', function () {
-                                    const selectedOption = select.options[select.selectedIndex];
-                                    // Get the behandeling type from the option text before the dash
-                                    const behandelingType = selectedOption.text.split(' - ')[0].trim();
-                                    input.value = behandelingType;
-                                });
-                            });
-                        </script>
 
                         {{-- Omschrijving --}}
                         <div class="mb-4">
@@ -97,4 +96,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const select = document.querySelector('select[name="behandeling_id"]');
+                                const input = document.getElementById('behandelingInput');
+                                select.addEventListener('change', function () {
+                                    const selectedOption = select.options[select.selectedIndex];
+                                    // Get the behandeling type from the option text before the dash
+                                    const behandelingType = selectedOption.text.split(' - ')[0].trim();
+                                    input.value = behandelingType;
+                                });
+                            });
+                        </script>
 </x-app-layout>

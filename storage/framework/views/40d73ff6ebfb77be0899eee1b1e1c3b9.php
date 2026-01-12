@@ -24,6 +24,21 @@
                         class="float-right inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Patiënt toevoegen
                     </a>
+
+                    <?php if(session('success')): ?>
+                        <div class="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                            <?php echo e(session('success')); ?>
+
+                            <meta http-equiv="refresh" content="3">
+                        </div>
+                    <?php elseif(session('error')): ?>
+                        <div class="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                            <?php echo e(session('error')); ?>
+
+                            <meta http-equiv="refresh" content="3">
+                        </div>
+                    <?php endif; ?>
+
                     <div class="mt-6">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>

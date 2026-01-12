@@ -75,7 +75,6 @@ class FactuurController extends Controller
             ],
         ]);
 
-
         $prijzen = [
             'Controles' => 50.00,
             'Vullingen' => 150.00,
@@ -83,6 +82,13 @@ class FactuurController extends Controller
             'Orthodontie' => 500.00,
             'Wortelkanaalbehandelingen' => 350.00,
         ];
+
+        $patient = Patient::find($request->patient_id);
+        if ($patient->Isactief === 0) {
+            return redirect()
+                ->back()
+                ->with('error', 'Kan geen factuur aanmaken voor een niet-actieve patiënt.');
+        }
 
         Factuur::create([
             'PatientId' => $request->patient_id,
@@ -92,12 +98,12 @@ class FactuurController extends Controller
             'Bedrag' => $prijzen[$request->behandeling],
             'Datum' => $request->datum,
             'Tijd' => $request->tijd,
-            'Nummer' => 'FAC' . str_pad(Factuur::max('Id') + 1, 6, '0', STR_PAD_LEFT),
+            'Nummer' => 'FAC'.str_pad(Factuur::max('Id') + 1, 6, '0', STR_PAD_LEFT),
             'Isactief' => false,
         ]);
 
         return redirect()
             ->route('overzicht-patienten.index')
-            ->with('success', 'Factuur succesvol aangemaakt');
+            ->with('success', 'Factuur succesvol aangemaakt, zie de factuur overzicht bij de Factuur pagina.');
     }
 }
