@@ -60,7 +60,7 @@ class PraktijkmanagementController extends Controller
         if ($patient->Isactief == 0) {
             Log::warning('Probeer bericht aan te maken voor inactieve patiënt', ['PatientId' => $patient->Id]);
 
-            return redirect()->route('praktijkmanagement.createBericht')->with('error', 'De geselecteerde patiënt is geen patient meer.');
+            return redirect()->route('praktijkmanagement.createBericht')->with('error', 'De geselecteerde patiënt is al volledig behandeld en heeft geen actieve status meer bij ons bedrijf.');
         } else {
             // Validatie van de input gegevens voor het bericht
             $validated = $request->validate([
