@@ -16,14 +16,24 @@ class BehandelingFactory extends Factory
      */
     public function definition(): array
     {
+        $prijzen = [
+            'Controles' => 50.00,
+            'Vullingen' => 150.00,
+            'Gebitsreiniging' => 75.00,
+            'Orthodontie' => 500.00,
+            'Wortelkanaalbehandelingen' => 350.00,
+        ];
+
+        $behandelingtype = $this->faker->randomElement(array_keys($prijzen));
+
         return [
             'MedewerkerId' => \App\Models\Medewerker::factory(),
             'PatientId' => \App\Models\Patient::factory(),
             'Datum' => $this->faker->date(),
             'Tijd' => $this->faker->time(),
-            'Behandelingtype' => $this->faker->randomElement(['Controles', 'Vullingen', 'Gebitsreiniging', 'Orthodontie', 'Wortelkanaalbehandelingen']),
+            'Behandelingtype' => $behandelingtype,
             'Omschrijving' => $this->faker->optional()->sentence(),
-            'Kosten' => $this->faker->randomFloat(2, 50, 1000),
+            'Kosten' => $prijzen[$behandelingtype],
             'Status' => $this->faker->randomElement(['Behandeld', 'Onbehandeld', 'Uitgesteld']),
             'Isactief' => $this->faker->boolean(),
             'Opmerking' => $this->faker->optional()->sentence(),

@@ -34,6 +34,7 @@ class AuthenticatedSessionController extends Controller
             'praktijkmanagement' => route('praktijkmanagement.index'),
             'tandarts' => route('dashboard'),
             'patient' => route('dashboard'),
+            'gebruiker' => route('dashboard'),
             default => route('welcome'),
         });
     }
