@@ -14,7 +14,7 @@
                         Nieuwe factuur aanmaken
                     </h3>
 
-                    <form action="{{ route('factuur.create') }}" method="POST">
+                    <form action="{{ route('factuur.store') }}" method="POST">
                         @csrf
 
                         <input type="hidden" name="patient_id" value="{{ $patient_id }}">
@@ -25,16 +25,31 @@
                                 Behandeling
                             </label>
 
-                            <select name="behandeling"
+                            <select name="behandeling_id"
                                 class="w-full rounded-md border-gray-300 dark:bg-gray-700 dark:text-white"
                                 required>
-                                @foreach($behandelingen as $naam => $prijs)
-                                    <option value="{{ $naam }}">
-                                        {{ $naam }} – €{{ number_format($prijs, 2, ',', '.') }}
+                                @foreach($behandelingen as $behandeling)
+                                    <option value="{{ $behandeling->Id }}">
+                                        {{ $behandeling->Behandelingtype }} - €{{ number_format($prijzen[$behandeling->Behandelingtype], 2) }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
+
+                        <input type="hidden" name="behandeling" id="behandelingInput" value="{{ $behandelingen->first()->Behandelingtype }}">
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const select = document.querySelector('select[name="behandeling_id"]');
+                                const input = document.getElementById('behandelingInput');
+                                select.addEventListener('change', function () {
+                                    const selectedOption = select.options[select.selectedIndex];
+                                    // Get the behandeling type from the option text before the dash
+                                    const behandelingType = selectedOption.text.split(' - ')[0].trim();
+                                    input.value = behandelingType;
+                                });
+                            });
+                        </script>
 
                         {{-- Omschrijving --}}
                         <div class="mb-4">

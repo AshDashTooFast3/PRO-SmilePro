@@ -35,33 +35,28 @@
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 @forelse($patienten as $patient)
                                     <tr>
-                                        <form action="{{ route('factuur.factuurmaken') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="patient_id" value="{{ $patient->PatientId }}">
+                                        <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $patient->Nummer }}
+                                        </td>
 
-                                            <td
-                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $patient->Nummer }}
-                                            </td>
+                                        <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $patient->Naam }}
+                                        </td>
 
-                                            <td
-                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $patient->Naam }}
-                                            </td>
+                                        <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $patient->MedischDossier }}
+                                        </td>
 
-                                            <td
-                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $patient->MedischDossier }}
-                                            </td>
-
-                                            <td
-                                                class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                        <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            <form action="{{ route('factuur.create') }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="patient_id" value="{{ $patient->PatientId }}">
                                                 <button type="submit"
                                                     class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                                     Factuur maken
                                                 </button>
-                                            </td>
-                                        </form>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>

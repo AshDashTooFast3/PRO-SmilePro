@@ -23,12 +23,13 @@ Route::get('/facturenOverzichtPatient', [FactuurController::class, 'facturenPati
     ->name('facturenOverzichtPatient.index')
     ->middleware(['auth', 'role:patient']);
 
-Route::post('/factuur', [FactuurController::class, 'factuurmaken'])
-    ->name('factuur.factuurmaken')
-    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
-
-Route::post('/factuur/create', [FactuurController::class, 'create'])
+Route::get('/factuur/create', [FactuurController::class, 'create'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
     ->name('factuur.create');
+
+Route::post('/factuur/store', [FactuurController::class, 'store'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('factuur.store');
 
 Route::get('/medewerkers', [MedewerkerOverzichtController::class, 'index'])
     ->middleware(['auth', 'role:praktijkmanagement'])

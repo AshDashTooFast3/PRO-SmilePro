@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
+use App\Models\Behandeling;
 use App\Models\Factuur;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -36,14 +37,15 @@ class FactuurController extends Controller
         return view('factuur.factuurPatient', ['facturen' => $facturen, 'title' => 'Mijn Facturen']);
     }
 
-    public function factuurmaken(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'patient_id' => 'required|integer',
         ]);
 
-        
-        $behandelingen = [
+        $behandelingen = Behandeling::all();
+
+        $prijzen = [
             'Controles' => 50.00,
             'Vullingen' => 150.00,
             'Gebitsreiniging' => 75.00,
@@ -51,41 +53,51 @@ class FactuurController extends Controller
             'Wortelkanaalbehandelingen' => 350.00,
         ];
 
-        return view('factuur.factuurMaken', [
+        return view('factuur.create', [
             'patient_id' => $request->patient_id, 'title' => 'Factuur Maken',
             'behandelingen' => $behandelingen,
+            'prijzen' => $prijzen,
         ]);
 
     }
 
-public function create(Request $request)
-{
-    
-    $prijzen = [
-        'Controles' => 50.00,
-        'Vullingen' => 150.00,
-        'Gebitsreiniging' => 75.00,
-        'Orthodontie' => 500.00,
-        'Wortelkanaalbehandelingen' => 350.00,
-    ];
+    public function store(Request $request)
+    {
+        $request->validate([
+            'patient_id' => 'required|integer',
+            'behandeling_id' => 'required|integer',
+            'behandeling' => 'required|string',
+            'omschrijving' => 'required|string',
+            'datum' => 'required|date',
+            'tijd' => [
+                'required',
+                'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/',
+            ],
+        ]);
 
-    if (!array_key_exists($request->behandeling, $prijzen)) {
-        abort(400, 'Onbekende behandeling');
+
+        $prijzen = [
+            'Controles' => 50.00,
+            'Vullingen' => 150.00,
+            'Gebitsreiniging' => 75.00,
+            'Orthodontie' => 500.00,
+            'Wortelkanaalbehandelingen' => 350.00,
+        ];
+
+        Factuur::create([
+            'PatientId' => $request->patient_id,
+            'BehandelingId' => $request->behandeling_id,
+            'Behandeling' => $request->behandeling,
+            'Omschrijving' => $request->omschrijving,
+            'Bedrag' => $prijzen[$request->behandeling],
+            'Datum' => $request->datum,
+            'Tijd' => $request->tijd,
+            'Nummer' => 'FAC' . str_pad(Factuur::max('Id') + 1, 6, '0', STR_PAD_LEFT),
+            'Isactief' => false,
+        ]);
+
+        return redirect()
+            ->route('overzicht-patienten.index')
+            ->with('success', 'Factuur succesvol aangemaakt');
     }
-    
-    Factuur::create([
-        'PatientId'  => $request->patient_id,
-        'Behandeling' => $request->behandeling,
-        'Omschrijving'=> $request->omschrijving,
-        'Prijs'       => $prijzen[$request->behandeling],
-        'Datum'       => $request->datum,
-        'Tijd'        => $request->tijd,
-        'Status'      => 'Niet-Verzonden',
-    ]);
-    
-    return redirect()
-        ->route('overzicht-patienten.index')
-        ->with('success', 'Factuur succesvol aangemaakt');
-}
-
 }
