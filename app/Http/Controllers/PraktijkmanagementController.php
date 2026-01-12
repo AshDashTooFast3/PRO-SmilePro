@@ -56,6 +56,12 @@ class PraktijkmanagementController extends Controller
     {
         $patient = Patient::find($request->input('Patient'));
 
+        if (empty($patient)) {
+            Log::warning('Probeer bericht aan te maken voor niet-bestaande patiënt', ['PatientId' => $request->input('Patient')]);
+
+            return redirect()->route('praktijkmanagement.createBericht')->with('error', 'De geselecteerde patiënt bestaat niet.');
+        }
+
         // Kijkt of de patient niet actief is
         if ($patient->Isactief == 0) {
             Log::warning('Probeer bericht aan te maken voor inactieve patiënt', ['PatientId' => $patient->Id]);
