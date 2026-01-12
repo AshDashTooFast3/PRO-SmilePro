@@ -47,6 +47,7 @@ class FactuurController extends Controller
         return view('factuur.factuurPatient', ['facturen' => $facturen, 'title' => 'Mijn Facturen']);
     }
 
+    //form pagina
     public function create(Request $request)
     {
         $request->validate([
@@ -55,6 +56,7 @@ class FactuurController extends Controller
 
         $behandelingen = Behandeling::all();
 
+        // Prijzen voor behandelingen
         $prijzen = [
             'Controles' => 50.00,
             'Vullingen' => 150.00,
@@ -73,6 +75,7 @@ class FactuurController extends Controller
 
     public function store(Request $request)
     {
+        //validatie
         $request->validate([
             'patient_id' => 'required|integer',
             'behandeling_id' => 'required|integer',
@@ -84,7 +87,7 @@ class FactuurController extends Controller
                 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/',
             ],
         ]);
-
+        // Prijzen voor behandelingen
         $prijzen = [
             'Controles' => 50.00,
             'Vullingen' => 150.00,
@@ -93,13 +96,14 @@ class FactuurController extends Controller
             'Wortelkanaalbehandelingen' => 350.00,
         ];
 
+        //Unhappy scenario: check of patient actief is
         $patient = Patient::find($request->patient_id);
         if ($patient->Isactief === 0) {
             return redirect()
                 ->back()
                 ->with('error', 'Kan geen factuur aanmaken voor een niet-actieve patiënt.');
         }
-
+        //maakt een factuur aan
         Factuur::create([
             'PatientId' => $request->patient_id,
             'BehandelingId' => $request->behandeling_id,

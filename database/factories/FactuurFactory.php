@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Patient;
 use App\Models\Behandeling;
+use App\Models\Patient;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Factuur>
@@ -24,7 +24,7 @@ class FactuurFactory extends Factory
             'Nummer' => $this->faker->unique()->bothify('FCT-#####'),
             'Omschrijving' => $this->faker->sentence(),
             'Datum' => $this->faker->date(),
-            'Tijd' => $this->faker->time(),
+            'Tijd' => $this->faker->time('H:i'),
             'Bedrag' => $this->faker->randomFloat(2, 50, 1000),
             'Status' => $this->faker->randomElement(['Verzonden', 'Niet-Verzonden', 'Betaald', 'Onbetaald']),
             'Isactief' => $this->faker->boolean(),
