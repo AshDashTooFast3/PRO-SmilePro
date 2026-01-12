@@ -60,6 +60,7 @@
                                             class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
                                             {{ $factuur->BehandelingType }}
                                         </td>
+
                                         <td
                                             class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
                                             {{ $factuur->Nummer }}

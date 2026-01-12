@@ -12,6 +12,8 @@ return new class extends Migration
     {
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_getVolledigeNaamPatienten');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAfsprakenCount');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllCommunicatie');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllFactuur');
 
         DB::unprepared("
         CREATE PROCEDURE sp_getVolledigeNaamPatienten()
@@ -42,7 +44,6 @@ return new class extends Migration
 
         DB::unprepared('
 
-        DROP PROCEDURE IF EXISTS sp_GetAllCommunicatie;
         CREATE PROCEDURE sp_GetAllCommunicatie()
         BEGIN
             SELECT 
@@ -75,6 +76,30 @@ return new class extends Migration
 
 
     ');
+
+        DB::unprepared('USE SmilePro;
+        CREATE PROCEDURE sp_GetAllFactuur()
+        BEGIN
+            SELECT 
+                persoon.Voornaam AS PatientVoornaam, 
+                persoon.Tussenvoegsel AS PatientTussenvoegsel,
+                persoon.Achternaam AS PatientAchternaam, 
+                b.Behandelingtype AS BehandelingType,
+                f.Id,
+                f.PatientId,
+                f.BehandelingId,
+                f.Nummer, 
+                f.Datum, 
+                f.Bedrag, 
+                f.Status,
+                f.Isactief
+            FROM Factuur f
+            INNER JOIN Patient p ON f.PatientId = p.Id
+            INNER JOIN Persoon persoon ON p.PersoonId = persoon.Id
+            INNER JOIN Behandeling b ON f.BehandelingId = b.Id
+            ORDER BY f.Datum DESC;
+        END
+        ');
     }
 
     /**
