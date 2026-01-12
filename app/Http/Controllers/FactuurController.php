@@ -99,11 +99,13 @@ class FactuurController extends Controller
         //Unhappy scenario: check of patient actief is
         $patient = Patient::find($request->patient_id);
         if ($patient->Isactief === 0) {
+            Log::warning('Probeer factuur aan te maken voor niet-actieve patiënt Id: '.$request->patient_id);
             return redirect()
                 ->back()
                 ->with('error', 'Kan geen factuur aanmaken voor een niet-actieve patiënt.');
         }
         //maakt een factuur aan
+
         Factuur::create([
             'PatientId' => $request->patient_id,
             'BehandelingId' => $request->behandeling_id,
@@ -115,6 +117,7 @@ class FactuurController extends Controller
             'Nummer' => 'FAC'.str_pad(Factuur::max('Id') + 1, 6, '0', STR_PAD_LEFT),
             'Isactief' => false,
         ]);
+        Log::info('Factuur aangemaakt voor PatientId: '.$request->patient_id);
 
         return redirect()
             ->route('overzicht-patienten.index')
