@@ -151,7 +151,9 @@ return new class extends Migration
             $table->unsignedInteger('PatientId');
             $table->unsignedInteger('BehandelingId');
             $table->string('Nummer', 20);
+            $table->string('Omschrijving', 255)->nullable();
             $table->date('Datum');
+            $table->time('Tijd');
             $table->decimal('Bedrag', 10, 2);
             $table->enum('Status', ['Verzonden', 'Niet-Verzonden', 'Betaald', 'Onbetaald']);
             $table->boolean('Isactief');

@@ -11,12 +11,21 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'index'])
-    ->name('praktijkmanagement.index')
+Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class, 'OverzichtBerichten'])
+    ->name('praktijkmanagement.berichten')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
-Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class, 'berichten'])
-    ->name('praktijkmanagement.berichten')
+Route::get('/praktijkmanagement/createBericht', [PraktijkmanagementController::class, 'createBericht'])
+    ->name('praktijkmanagement.createBericht')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+    
+Route::post('/praktijkmanagement/storeBericht', [PraktijkmanagementController::class, 'storeBericht'])
+    ->name('praktijkmanagement.storeBericht')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+
+Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'index'])
+    ->name('praktijkmanagement.index')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
 Route::get('/factuur', [FactuurController::class, 'index'])

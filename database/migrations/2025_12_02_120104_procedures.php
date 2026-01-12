@@ -104,9 +104,11 @@ return new class extends Migration
                 f.PatientId,
                 f.BehandelingId,
                 f.Nummer, 
-                f.Datum, 
-                f.Bedrag, 
+                f.Omschrijving,
+                f.Datum,
+                f.Tijd, 
                 f.Status,
+                f.Bedrag, 
                 f.Isactief
             FROM Factuur f
             INNER JOIN Patient p ON f.PatientId = p.Id
