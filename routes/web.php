@@ -19,6 +19,10 @@ Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class
     ->name('praktijkmanagement.berichten')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+Route::get('/factuur', [FactuurController::class, 'index'])
+    ->name('factuur.index')
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
+
 Route::get('/facturenOverzichtPatient', [FactuurController::class, 'facturenPatient'])
     ->name('facturenOverzichtPatient.index')
     ->middleware(['auth', 'role:patient']);

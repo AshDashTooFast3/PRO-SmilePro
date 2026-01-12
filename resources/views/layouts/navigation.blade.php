@@ -46,6 +46,12 @@
                             {{ _('Berichten') }}
                         </x-nav-link>
                     </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('factuur.index')" :active="request()->routeIs('factuur.index')">
+                            {{ _('Facturen') }}
+                        </x-nav-link>
+                    </div>
                 @endif
 
 

@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Log;
 
 class FactuurController extends Controller
 {
+    
+    public function index()
+    {
+        $facturen = Factuur::getAllFacturen();
+
+        return view('factuur.index', [
+            'title' => 'Facturen Overzicht',
+            'facturen' => $facturen,
+        ]);
+    }
     public function facturenPatient()
     {
         $gebruiker = Auth::user();
