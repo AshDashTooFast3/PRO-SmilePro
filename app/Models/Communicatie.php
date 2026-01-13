@@ -61,16 +61,18 @@ class Communicatie extends Model
 
                 return false;
             }
-            if (!Communicatie::where('Id', $Id)->exists()) {
-                Log::warning("Bericht Id {$Id} bestaat niet in de database.");
 
-                return false;
-            }
-            else{
-            DB::select('CALL sp_DeleteCommunicatie(?)', [$Id]);
+                if (!Communicatie::where('Id', $Id)->exists()) {
+                    Log::warning("Bericht Id {$Id} bestaat niet in de database.");
 
-            Log::info("Bericht Id {$Id} succesvol verwijderd.");
-            return true;
+                    return false;
+                }
+
+                else{
+                DB::select('CALL sp_DeleteCommunicatie(?)', [$Id]);
+
+                Log::info("Bericht Id {$Id} succesvol verwijderd.");
+                return true;
             }
         } catch (\Exception $e) {
             Log::error("Fout bij het verwijderen van bericht Id {$Id}: {$e->getMessage()}");
