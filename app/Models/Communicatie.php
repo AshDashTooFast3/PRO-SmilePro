@@ -56,12 +56,12 @@ class Communicatie extends Model
     public static function DeleteBericht(int $Id): bool
     {
         try {
-            if (empty($Id) || $Id <= 0) {
+            if (empty($Id) || $Id <= 0 || $Id === null) {
                 Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $Id]);
 
                 return false;
             }
-
+            
                 if (!Communicatie::where('Id', $Id)->exists()) {
                     Log::warning("Bericht Id {$Id} bestaat niet in de database.");
 
