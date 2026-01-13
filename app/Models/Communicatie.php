@@ -29,7 +29,7 @@ class Communicatie extends Model
 
     // pakt alle berichten en eventuele errors
 
-    public function getAllCommunicatie()
+    public function getAllCommunicatie(): array
     {
         try {
             $result = DB::select('CALL sp_GetAllCommunicatie()');
@@ -50,6 +50,24 @@ class Communicatie extends Model
             Log::error('Fout in getCommunicatie: '.$e->getMessage());
 
             return [];
+        }
+    }
+
+    public static function deleteBericht(int $berichtId): bool
+    {
+       try {
+        if (empty($berichtId) || $berichtId <= 0) {
+            Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $berichtId]);
+            return false;
+        }
+            DB::statement('CALL sp_DeleteCommunicatie(?)', [$berichtId]);
+
+            Log::info('Bericht Id '.$berichtId.' succesvol verwijderd.');
+            return true;
+        } catch (\Exception $e) {
+            Log::error('Fout bij het verwijderen van bericht Id '.$berichtId.': '.$e->getMessage());
+
+            return false;
         }
     }
 
