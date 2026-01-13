@@ -53,19 +53,27 @@ class Communicatie extends Model
         }
     }
 
-    public static function DeleteBericht(int $berichtId): bool
+    public static function DeleteBericht(int $Id): bool
     {
-       try {
-        if (empty($berichtId) || $berichtId <= 0) {
-            Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $berichtId]);
-            return false;
-        }
-            DB::statement('CALL sp_DeleteCommunicatie(?)', [$berichtId]);
+        try {
+            if (empty($Id) || $Id <= 0) {
+                Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $Id]);
 
-            Log::info('Bericht Id '.$berichtId.' succesvol verwijderd.');
+                return false;
+            }
+            if (!Communicatie::where('Id', $Id)->exists()) {
+                Log::warning("Bericht Id {$Id} bestaat niet in de database.");
+
+                return false;
+            }
+            else{
+            DB::select('CALL sp_DeleteCommunicatie(?)', [$Id]);
+
+            Log::info("Bericht Id {$Id} succesvol verwijderd.");
             return true;
+            }
         } catch (\Exception $e) {
-            Log::error('Fout bij het verwijderen van bericht Id '.$berichtId.': '.$e->getMessage());
+            Log::error("Fout bij het verwijderen van bericht Id {$Id}: {$e->getMessage()}");
 
             return false;
         }

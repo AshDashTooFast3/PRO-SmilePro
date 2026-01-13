@@ -2,28 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Communicatie;
+use App\Models\Medewerker;
+use App\Models\Patient;
 use Illuminate\Http\Request;
-use \App\Models\Communicatie;
-use \App\Models\Patient;
-use \App\Models\Medewerker;
 use Illuminate\Support\Facades\Log;
 
 class BerichtController extends Controller
 {
     private $communicatie;
+
     public function __construct()
     {
-        $this->communicatie = new Communicatie();
-    }   
+        $this->communicatie = new Communicatie;
+    }
 
     public function index()
     {
         // haalt alle berichten op
         $berichten = $this->communicatie->getAllCommunicatie();
-
-        // verwijderd een bericht
-        $berichtenId = request()->query('verwijder');
-        $berichtverwijderen = $this->communicatie->DeleteBericht($berichtenId ?? 0);
 
         // log voor het aantal berichten
         if ($berichten > 0) {
@@ -35,7 +32,7 @@ class BerichtController extends Controller
         return view('berichten.index', [
             'title' => 'Berichten Overzicht',
             'berichten' => $berichten,
-            'berichtverwijderen' => $berichtverwijderen,
+
         ]);
     }
 
@@ -89,6 +86,20 @@ class BerichtController extends Controller
 
             // Stuurt je terug naar de OverzichtBerichten pagina met een succesmelding
             return redirect()->route('berichten.index')->with('success', 'Bericht succesvol aangemaakt.');
+        }
+    }
+
+    public function destroy($Id)
+    {
+        $result = Communicatie::DeleteBericht((int) $Id);
+
+
+        if ($result === true) {
+            return redirect()->route('berichten.index')
+                ->with('success', 'Bericht succesvol verwijderd.');
+        } else {
+            return redirect()->route('berichten.index')
+                ->with('error', 'Bericht niet gevonden of kon niet verwijderd worden.');
         }
     }
 }

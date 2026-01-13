@@ -46,6 +46,9 @@
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Verzonden Datum</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Annuleren</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -66,6 +69,19 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                             {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                            <form method="POST"
+                                                  action="{{ route('berichten.destroy', $bericht->Id) }}"
+                                                  onsubmit="return confirm('Weet u zeker dat u dit bericht wilt annuleren?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="px-4 py-2 bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">
+                                                    Annuleren
+                                                </button>
+                                            </form>
+                                        {{-- Optioneel: Toon een bevestiging na annuleren of extra acties --}}
                                         </td>
                                     </tr>
                                 @empty
