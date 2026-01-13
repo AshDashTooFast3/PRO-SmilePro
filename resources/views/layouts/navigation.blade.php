@@ -19,9 +19,21 @@
                         </x-nav-link>
                     </div>
 
+                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('medewerkers.overzicht')" :active="request()->routeIs('medewerkers.overzicht')">
+                            {{ _('Medewerkers') }}
+                        </x-nav-link>
+                    </div>
+
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('praktijkmanagement.berichten')"
-                            :active="request()->routeIs('praktijkmanagement.berichten')">
+                        <x-nav-link :href="route('overzicht-patienten.index')" :active="request()->routeIs('overzicht-patienten.index')">
+                            {{ _('Patienten') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('berichten.index')"
+                            :active="request()->routeIs('berichten.index')">
                             {{ _('Berichten') }}
                         </x-nav-link>
                     </div>
@@ -41,19 +53,10 @@
                     </div>
                 @endif
 
-                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement', 'Tandarts', 'Assistent', 'mondhygienist']))
+                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Tandarts', 'Assistent', 'mondhygienist']))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('overzicht-patienten.index')" :active="request()->routeIs('overzicht-patienten.index')">
-                            {{ _('Patienten Overzicht') }}
-                        </x-nav-link>
-                    </div>
-                @endif
-
-
-                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement']))
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('medewerkers.overzicht')" :active="request()->routeIs('medewerkers.overzicht')">
-                            {{ _('Medewerkers') }}
+                            {{ _('Patienten') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -138,7 +141,7 @@
             </div>
 
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('praktijkmanagement.berichten')" :active="request()->routeIs('praktijkmanagement.berichten')">
+                <x-responsive-nav-link :href="route('berichten.index')" :active="request()->routeIs('berichten.index')">
                     {{ _('Berichten') }}
                 </x-responsive-nav-link>
             </div>

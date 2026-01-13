@@ -9,13 +9,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+
+                    @if(session('success'))
+                        <div class="mt-4 p-4 bg-green-400 border border-green-400 text-green-900 rounded">
+                            {{ session('success') }}
+                            <meta http-equiv="refresh" content="5;url={{ route('berichten.index') }}">
+                        </div>
+                    @endif
+                    
                     @if(session('error'))
                         <div class="mt-4 p-4 bg-red-300 border border-red-400 text-red-900 rounded">
                             {{ session('error') }}
-                            <meta http-equiv="refresh" content="5;url={{ route('praktijkmanagement.createBericht') }}">
+                            <meta http-equiv="refresh" content="5;url={{ route('berichten.create') }}">
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('praktijkmanagement.storeBericht') }}">
+
+                    <form method="POST" action="{{ route('berichten.store') }}">
                         @csrf
                         <div class="mb-4">
                             <label for="Patient" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Patient:</label>

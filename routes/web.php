@@ -5,22 +5,23 @@ use App\Http\Controllers\MedewerkerOverzichtController;
 use App\Http\Controllers\patientenController;
 use App\Http\Controllers\PraktijkmanagementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BerichtController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/praktijkmanagement/berichten', [PraktijkmanagementController::class, 'OverzichtBerichten'])
-    ->name('praktijkmanagement.berichten')
+Route::get('/berichten', [BerichtController::class, 'index'])
+    ->name('berichten.index')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
-Route::get('/praktijkmanagement/createBericht', [PraktijkmanagementController::class, 'createBericht'])
-    ->name('praktijkmanagement.createBericht')
+Route::get('/berichten/create', [BerichtController::class, 'create'])
+    ->name('berichten.create')
     ->middleware(['auth', 'role:praktijkmanagement']);
     
-Route::post('/praktijkmanagement/storeBericht', [PraktijkmanagementController::class, 'storeBericht'])
-    ->name('praktijkmanagement.storeBericht')
+Route::post('/berichten', [BerichtController::class, 'store'])
+    ->name('berichten.store')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
 

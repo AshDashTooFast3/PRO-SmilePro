@@ -53,7 +53,7 @@ class Communicatie extends Model
         }
     }
 
-    public static function deleteBericht(int $berichtId): bool
+    public static function DeleteBericht(int $berichtId): bool
     {
        try {
         if (empty($berichtId) || $berichtId <= 0) {
