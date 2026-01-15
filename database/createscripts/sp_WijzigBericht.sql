@@ -16,7 +16,8 @@ BEGIN
     
     SET PatientId = p_PatientId,
         MedewerkerId = p_MedewerkerId,
-        Bericht = p_Bericht
+        Bericht = p_Bericht,
+        VerzondenDatum = NULL
         
     WHERE Id = p_Id;
 

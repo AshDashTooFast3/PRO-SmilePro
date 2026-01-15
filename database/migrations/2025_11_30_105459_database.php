@@ -169,7 +169,8 @@ return new class extends Migration
             $table->unsignedInteger('PatientId');
             $table->unsignedInteger('MedewerkerId');
             $table->string('Bericht', 255);
-            $table->dateTime('VerzondenDatum');
+            $table->dateTime('VerzondenDatum')
+                ->nullable();
             $table->boolean('Isactief');
             $table->string('Opmerking', 255)->nullable();
             $table->dateTime('Datumaangemaakt', 6)->default(DB::raw('NOW(6)'));

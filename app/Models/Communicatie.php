@@ -29,17 +29,17 @@ class Communicatie extends Model
 
     // pakt alle berichten en eventuele errors
 
-    public function getAllCommunicatie(): array
+    public function getAllBerichten(): array
     {
         try {
-            $result = DB::select('CALL sp_GetAllCommunicatie()');
+            $result = DB::select('CALL sp_getAllBerichten()');
 
             if (is_null($result)) {
-                Log::warning('sp_GetAllCommunicatie retourneerde null.');
+                Log::warning('sp_getAllBerichten retourneerde null.');
 
                 return [];
             } elseif (empty($result)) {
-                Log::info('sp_GetAllCommunicatie retourneerde een lege array.');
+                Log::info('sp_getAllBerichten retourneerde een lege array.');
 
                 return [];
             }
@@ -62,7 +62,7 @@ class Communicatie extends Model
                 return false;
             }
 
-            DB::select('CALL sp_DeleteCommunicatie(?)', [$Id]);
+            DB::select('CALL sp_DeleteBericht(?)', [$Id]);
 
             Log::info("Bericht Id {$Id} succesvol verwijderd.");
             return true;
@@ -89,7 +89,7 @@ class Communicatie extends Model
             return true;
 
         } catch (\Exception $e) {
-            Log::error("Fout bij het verwijderen van bericht Id {$Id}: {$e->getMessage()}");
+            Log::error("Fout bij het wijzigen van bericht Id {$Id}: {$e->getMessage()}");
 
             return false;
         }

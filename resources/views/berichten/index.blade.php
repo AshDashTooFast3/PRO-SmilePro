@@ -71,7 +71,11 @@
                                             {{ $bericht->Bericht }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
+                                            @if (is_null($bericht->VerzondenDatum))
+                                                <span class="text-yellow-600 font-semibold">Niet verzonden</span>
+                                            @else
+                                                {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
+                                            @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                             <a href="{{ route('berichten.edit', $bericht->Id) }}"
