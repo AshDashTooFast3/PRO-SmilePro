@@ -74,6 +74,27 @@ class Communicatie extends Model
         }
     }
 
+    public static function WijzigBericht(int $Id, int $PatientId, int $MedewerkerId, string $Omschrijving): bool
+    {
+        try {
+            if (empty($Id) || $Id <= 0 || $Id === null) {
+                Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $Id]);
+
+                return false;
+            }
+
+            DB::select('CALL sp_WijzigBericht(?, ?, ?, ?)', [$Id, $PatientId, $MedewerkerId, $Omschrijving]);
+
+            Log::info("Bericht Id {$Id} succesvol gewijzigd.");
+            return true;
+
+        } catch (\Exception $e) {
+            Log::error("Fout bij het verwijderen van bericht Id {$Id}: {$e->getMessage()}");
+
+            return false;
+        }
+    }
+
     // een bericht hoort bij een patient
     public function patient()
     {

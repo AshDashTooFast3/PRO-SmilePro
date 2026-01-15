@@ -89,10 +89,23 @@ class BerichtController extends Controller
         }
     }
 
+    public function edit($Id)
+    {
+        $bericht = Communicatie::find($Id);
+        $patienten = Patient::all();
+        $medewerkers = Medewerker::all();        
+
+        return view('berichten.edit', [
+            'title' => 'Bericht bewerken',
+            'bericht' => $bericht,
+            'patienten' => $patienten,
+            'medewerkers' => $medewerkers,
+        ]);
+    }
+
     public function destroy($Id)
     {
         $result = Communicatie::DeleteBericht((int) $Id);
-
 
         if ($result === true) {
             return redirect()->route('berichten.index')

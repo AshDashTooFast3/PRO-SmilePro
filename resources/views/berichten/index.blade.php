@@ -10,11 +10,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
-                    
+
                     <? echo str_repeat('<br>', 2); ?>
 
                     <a href="{{ route('berichten.create') }}"
-                       class="inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
+                        class="inline-block px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition">
                         Nieuw Bericht aanmaken
                     </a>
 
@@ -29,7 +29,7 @@
                             <meta http-equiv="refresh" content="3;url={{ route('berichten.index') }}">
                         </div>
                     @endif
-                    
+
                     <div class="mt-6">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
@@ -46,6 +46,9 @@
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Verzonden Datum</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Wijzigen</th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Annuleren</th>
@@ -71,23 +74,30 @@
                                             {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            <form method="POST"
-                                                  action="{{ route('berichten.destroy', $bericht->Id) }}"
-                                                  onsubmit="return confirm('Weet u zeker dat u dit bericht wilt annuleren?');">
+                                            <a href="{{ route('berichten.edit', $bericht->Id) }}"
+                                                class="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
+                                                Wijzigen
+                                            </a>
+                                            {{-- Optioneel: Toon een bevestiging na annuleren of extra acties --}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                            <form method="POST" action="{{ route('berichten.destroy', $bericht->Id) }}"
+                                                onsubmit="return confirm('Weet u zeker dat u dit bericht wilt annuleren?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                        class="px-4 py-2 bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">
+                                                    class="px-4 py-2 bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">
                                                     Annuleren
                                                 </button>
                                             </form>
-                                        {{-- Optioneel: Toon een bevestiging na annuleren of extra acties --}}
+                                            {{-- Optioneel: Toon een bevestiging na annuleren of extra acties --}}
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="6"
-                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen berichten gevonden.</td>
+                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen
+                                            berichten gevonden.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
