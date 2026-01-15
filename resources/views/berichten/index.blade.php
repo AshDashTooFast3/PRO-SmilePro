@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
 
-                    <? echo str_repeat('<br>', 2); ?>
+                    {!! str_repeat('<br>', 2) !!}
 
                     <a href="{{ route('berichten.create') }}"
                         class="inline-block px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition">
@@ -31,27 +31,27 @@
                     @endif
 
                     <div class="mt-6">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <table class="min-w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Patient</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Medewerker</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Bericht</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Verzonden Datum</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Wijzigen</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Annuleren</th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                        Patient
+                                    </th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                        Medewerker
+                                    </th>
+                                    <th class="w-2/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                        Bericht
+                                    </th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-xs font-medium">
+                                        Verzonden datum
+                                    </th>
+                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                        Wijzigen
+                                    </th>
+                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                        Annuleren
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -67,35 +67,32 @@
                                             {{ $bericht->MedewerkerTussenvoegsel }}
                                             {{ $bericht->MedewerkerAchternaam }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                        <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100 break-words whitespace-normal">
                                             {{ $bericht->Bericht }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            @if (is_null($bericht->VerzondenDatum))
+                                            @if ($bericht->VerzondenDatum === null)
                                                 <span class="text-yellow-600 font-semibold">Niet verzonden</span>
                                             @else
                                                 {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            <a href="{{ route('berichten.edit', $bericht->Id) }}"
-                                                class="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
-                                                Wijzigen
-                                            </a>
-                                            {{-- Optioneel: Toon een bevestiging na annuleren of extra acties --}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            <form method="POST" action="{{ route('berichten.destroy', $bericht->Id) }}"
-                                                onsubmit="return confirm('Weet u zeker dat u dit bericht wilt annuleren?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="px-4 py-2 bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">
-                                                    Annuleren
-                                                </button>
-                                            </form>
-                                            {{-- Optioneel: Toon een bevestiging na annuleren of extra acties --}}
-                                        </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <a href="{{ route('berichten.edit', $bericht->Id) }}"
+                                            class="inline-block px-3 py-2 bg-blue-600 text-white rounded text-sm">
+                                            Wijzigen
+                                        </a>
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center">
+                                        <form method="POST" action="{{ route('berichten.destroy', $bericht->Id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="px-3 py-2 bg-red-600 text-white rounded text-sm">
+                                                Annuleren
+                                            </button>
+                                        </form>
+                                    </td>
                                     </tr>
                                 @empty
                                     <tr>
