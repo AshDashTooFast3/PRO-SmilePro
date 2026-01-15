@@ -76,7 +76,7 @@ class BerichtController extends Controller
                 'PatientId' => $validated['Patient'],
                 'MedewerkerId' => $validated['Medewerker'],
                 'Bericht' => $validated['Bericht'],
-                'VerzondenDatum' => now(),
+                'VerzondenDatum' => null,
                 'Isactief' => 0,
 
             ]);
