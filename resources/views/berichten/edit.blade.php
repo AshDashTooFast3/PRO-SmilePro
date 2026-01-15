@@ -26,10 +26,17 @@
 
                     <form method="POST" action="{{ route('berichten.update', $bericht->Id) }}">
                         @csrf
+                        @method('PUT')
                         <div class="mb-4">
-                            <label for="Patient"
+                            <div class="mb-4">
+                                <label for="Id"
+                                    class="block hidden text-sm font-medium text-gray-700 dark:text-gray-300">Id</label>
+                                <input type="number" name="Id" id="Id" value="{{ old('Id', $bericht->Id) }}" readonly
+                                    class=" hidden mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100" />
+                            </div>
+                            <label for="PatientId"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Patient:</label>
-                            <select name="Patient" id="Patient"
+                            <select name="PatientId" id="PatientId"
                                 class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100"
                                 required>
                                 @foreach($patienten as $patient)
@@ -44,9 +51,9 @@
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="Medewerker"
+                            <label for="MedewerkerId"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Medewerker:</label>
-                            <select name="Medewerker" id="Medewerker"
+                            <select name="MedewerkerId" id="MedewerkerId"
                                 class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100"
                                 required>
                                 @foreach($medewerkers as $medewerker)
@@ -56,7 +63,7 @@
                                         {{ $medewerker->Persoon->Tussenvoegsel }}
                                         {{ $medewerker->Persoon->Achternaam }}
                                         {{ $medewerker->Nummer }}
-                                        </option>
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

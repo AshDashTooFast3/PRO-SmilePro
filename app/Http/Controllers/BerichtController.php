@@ -93,7 +93,7 @@ class BerichtController extends Controller
     {
         $bericht = Communicatie::find($Id);
         $patienten = Patient::all();
-        $medewerkers = Medewerker::all();        
+        $medewerkers = Medewerker::all();
 
         return view('berichten.edit', [
             'title' => 'Bericht bewerken',
@@ -101,6 +101,32 @@ class BerichtController extends Controller
             'patienten' => $patienten,
             'medewerkers' => $medewerkers,
         ]);
+    }
+
+    public function update(Request $request, $Id)
+    {
+        $validated = $request->validate([
+            'Id' => 'required|integer|exists:Communicatie,Id',
+            'PatientId' => 'required|integer|exists:Patient,Id',
+            'MedewerkerId' => 'required|integer|exists:Medewerker,Id',
+            'Bericht' => 'required|string',
+        ]);
+
+        $result = Communicatie::WijzigBericht(
+            (int) $Id,
+            (int) $validated['PatientId'],
+            (int) $validated['MedewerkerId'],
+            $validated['Bericht']
+        );
+
+
+        if ($result === true) {
+            return redirect()->route('berichten.index')
+                ->with('success', 'Bericht succesvol bijgewerkt.');
+        } else {
+            return redirect()->route('berichten.index')
+                ->with('error', 'Bericht niet gevonden of kon niet bijgewerkt worden.');
+        }
     }
 
     public function destroy($Id)
