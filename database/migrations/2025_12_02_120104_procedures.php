@@ -94,7 +94,7 @@ return new class extends Migration
         END;
 ');
 
-        DB::unprepared('USE SmilePro;
+        DB::unprepared('
             CREATE PROCEDURE sp_GetAllFactuur()
             BEGIN
                 SELECT 
@@ -121,8 +121,6 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-        USE SmilePro;
-
         DROP PROCEDURE IF EXISTS sp_DeleteBericht;
 
 
