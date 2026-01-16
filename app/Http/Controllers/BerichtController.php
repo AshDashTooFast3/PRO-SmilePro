@@ -105,7 +105,7 @@ class BerichtController extends Controller
 
     public function update(Request $request, $Id)
     {
-        //valideren
+        // valideren
         $validated = $request->validate([
             'Id' => 'required|integer|exists:Communicatie,Id',
             'PatientId' => 'required|integer|exists:Patient,Id',
@@ -113,7 +113,15 @@ class BerichtController extends Controller
             'Bericht' => 'required|string',
         ]);
 
-        //bericht bijwerken met de methode in het model genaamd WijzigBericht
+        $patient = Patient::find($validated['PatientId']);
+        
+        if ($patient && $patient->Isactief == 0) {
+            Log::warning('Probeer bericht bij te werken voor inactieve patiënt', ['PatientId' => $validated['PatientId']]);
+
+            return redirect()->route('berichten.index')->with('error', 'De geselecteerde patiënt is al volledig behandeld en heeft geen actieve status meer bij ons bedrijf.');
+        }
+
+        // bericht bijwerken met de methode in het model genaamd WijzigBericht
         $result = Communicatie::WijzigBericht(
             (int) $Id,
             (int) $validated['PatientId'],
@@ -121,15 +129,17 @@ class BerichtController extends Controller
             $validated['Bericht']
         );
 
-        //als het gelukt is om het bericht bij te werken, stuur je terug naar de berichten index met een succesmelding.
+        // als het gelukt is om het bericht bij te werken, stuur je terug naar de berichten index met een succesmelding.
         if ($result === true) {
             Log::info('Bericht bijgewerkt', ['BerichtId' => $Id]);
+
             return redirect()->route('berichten.index')
                 ->with('success', 'Bericht succesvol bijgewerkt.');
         }
-        //als het niet gelukt is, stuur je terug naar de berichten index met een errormelding.
+        // als het niet gelukt is, stuur je terug naar de berichten index met een errormelding.
         else {
             Log::error('Fout bij het bijwerken van bericht', ['BerichtId' => $Id]);
+
             return redirect()->route('berichten.index')
                 ->with('error', 'Bericht niet gevonden of kon niet bijgewerkt worden.');
         }
@@ -141,10 +151,12 @@ class BerichtController extends Controller
 
         if ($result === true) {
             Log::info('Bericht verwijderd', ['BerichtId' => $Id]);
+
             return redirect()->route('berichten.index')
                 ->with('success', 'Bericht succesvol verwijderd.');
         } else {
             Log::error('Fout bij het verwijderen van bericht', ['BerichtId' => $Id]);
+
             return redirect()->route('berichten.index')
                 ->with('error', 'Bericht niet gevonden of kon niet verwijderd worden.');
         }
