@@ -88,7 +88,7 @@
                                 required>{{ old('Bericht', $bericht->Bericht) }}</textarea>
                         </div>
                         <button type="submit"
-                            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">Aanmaken</button>
+                            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">Bijwerken</button>
                     </form>
                 </div>
             </div>

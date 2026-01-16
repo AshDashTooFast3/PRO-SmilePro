@@ -157,13 +157,11 @@ class BerichtController extends Controller
     public function destroy($Id)
     {
         $bericht = Communicatie::find($Id);
-        // dd($bericht);
-        $patient = Patient::find($bericht->PatientId);
 
-        if ($patient && $patient->Isactief == 1) {
-            Log::warning('Probeer bericht te annuleren voor inactieve patiënt', ['PatientId' => $patient->Id]);
+        if ($bericht->Status === 'In behandeling') {
+            Log::warning('Probeer bericht te annuleren voor een patient die in behandeling is', ['PatientId' => $bericht->PatientId]);
 
-            return redirect()->route('berichten.index')->with('error', 'Je kunt geen bericht annuleren voor een patiënt die nog actief is bij ons bedrijf. wij raden u aan om het bericht te wijzigen i.p.v. te annuleren.');
+            return redirect()->route('berichten.index')->with('error', 'Je kunt geen bericht annuleren voor een patiënt die nog in behandeling is. wij raden u aan om het bericht te wijzigen i.p.v. te annuleren.');
         }
 
         $result = Communicatie::DeleteBericht((int) $Id);
