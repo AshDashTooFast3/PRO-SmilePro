@@ -26,7 +26,7 @@
                     @elseif(session('error'))
                         <div class="mt-4 p-4 bg-red-300 border border-red-400 text-red-900 rounded">
                             {{ session('error') }}
-                            <meta http-equiv="refresh" content="3;url={{ route('berichten.index') }}">
+                            <meta http-equiv="refresh" content="8;url={{ route('berichten.index') }}">
                         </div>
                     @endif
 
