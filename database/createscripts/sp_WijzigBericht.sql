@@ -8,7 +8,8 @@ CREATE PROCEDURE sp_WijzigBericht(
     IN p_Id INT,
     IN p_PatientId INT,
     IN p_MedewerkerId INT,
-    IN p_Bericht VARCHAR(255)
+    IN p_Bericht VARCHAR(255),
+    IN p_Status ENUM('Betaald', 'Onbetaald', 'In behandeling', 'Afgehandeld')
 
 )
 BEGIN
@@ -18,6 +19,7 @@ BEGIN
         MedewerkerId = p_MedewerkerId,
         Bericht = p_Bericht,
         VerzondenDatum = NULL
+        Status = p_Status
         
     WHERE Id = p_Id;
 

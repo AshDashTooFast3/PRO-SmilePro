@@ -111,8 +111,10 @@ class BerichtController extends Controller
             'PatientId' => 'required|integer|exists:Patient,Id',
             'MedewerkerId' => 'required|integer|exists:Medewerker,Id',
             'Bericht' => 'required|string',
+            'Status' => 'required|string',
         ]);
 
+        // controleert of de patient actief is
         $patient = Patient::find($validated['PatientId']);
 
         if ($patient && $patient->Isactief == 0) {
@@ -127,7 +129,8 @@ class BerichtController extends Controller
             (int) $Id,
             (int) $validated['PatientId'],
             (int) $validated['MedewerkerId'],
-            $validated['Bericht']
+            $validated['Bericht'],
+            $validated['Status']
         );
 
         // als het gelukt is om het bericht bij te werken, stuur je terug naar de berichten index met een succesmelding.

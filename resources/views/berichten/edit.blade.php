@@ -68,6 +68,19 @@
                             </select>
                         </div>
                         <div class="mb-4">
+                            <label for="Status"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status:</label>
+                            <select name="Status" id="Status"
+                                class="mt-1 block w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100"
+                                required>
+                                @foreach(['Betaald', 'Onbetaald', 'In behandeling', 'Afgehandeld'] as $status)
+                                    <option value="{{ $status }}" {{ $status == $bericht->Status ? 'selected' : '' }}>
+                                        {{ $status }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-4">
                             <label for="Bericht"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bericht</label>
                             <textarea name="Bericht" id="Bericht" rows="4"

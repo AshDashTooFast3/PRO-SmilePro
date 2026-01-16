@@ -83,8 +83,10 @@ return new class extends Migration
                 ORDER BY f.Datum DESC;
             END
         ');
+    
+    //Berichten stored procedures
 
-         DB::unprepared('
+        DB::unprepared('
 
         CREATE PROCEDURE sp_GetAllBerichten()
         BEGIN
@@ -146,7 +148,8 @@ return new class extends Migration
             IN CommunicatieId INT,
             IN PatientId INT,
             IN MedewerkerId INT,
-            IN Bericht VARCHAR(255)
+            IN Bericht VARCHAR(255),
+            IN Status ENUM(\'Betaald\', \'Onbetaald\', \'In behandeling\', \'Afgehandeld\')
         )
 
         BEGIN
@@ -155,7 +158,8 @@ return new class extends Migration
                 PatientId = PatientId,
                 MedewerkerId = MedewerkerId,
                 Bericht = Bericht,
-                VerzondenDatum = NULL
+                VerzondenDatum = NULL,
+                Status = Status
             WHERE Id = CommunicatieId;
         END
         ');

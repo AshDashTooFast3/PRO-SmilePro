@@ -75,7 +75,7 @@ class Communicatie extends Model
         }
     }
 
-    public static function WijzigBericht(int $Id, int $PatientId, int $MedewerkerId, string $Omschrijving): bool
+    public static function WijzigBericht(int $Id, int $PatientId, int $MedewerkerId, string $Bericht, string $Status): bool
     {
         try {
             if (empty($Id) || $Id <= 0 || $Id === null) {
@@ -84,8 +84,7 @@ class Communicatie extends Model
                 return false;
             }
 
-            DB::select('CALL sp_WijzigBericht(?, ?, ?, ?)', [$Id, $PatientId, $MedewerkerId, $Omschrijving]);
-
+            DB::select('CALL sp_WijzigBericht(?, ?, ?, ?, ?)', [$Id, $PatientId, $MedewerkerId, $Bericht, $Status ]);
             Log::info("Bericht Id {$Id} succesvol gewijzigd.");
             return true;
 
