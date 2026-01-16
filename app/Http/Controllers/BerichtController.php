@@ -41,11 +41,14 @@ class BerichtController extends Controller
         // Haalt alle patienten en medewerkers op voor de dropdowns
         $patienten = Patient::all();
         $medewerkers = Medewerker::all();
+        $bericht = new Communicatie();
+
 
         return view('berichten.create', [
             'title' => 'Nieuw Bericht Aanmaken',
             'patienten' => $patienten,
             'medewerkers' => $medewerkers,
+            'bericht' => $bericht,
         ]);
     }
 
@@ -70,6 +73,7 @@ class BerichtController extends Controller
                 'Patient' => 'required|string|max:255',
                 'Medewerker' => 'required|string|max:255',
                 'Bericht' => 'required|string',
+                'Status' => 'required|string',
             ]);
             // Maakt een nieuw bericht aan in de database met behulp van de gevalideerde gegevens
             $this->communicatie->create([
@@ -77,6 +81,7 @@ class BerichtController extends Controller
                 'MedewerkerId' => $validated['Medewerker'],
                 'Bericht' => $validated['Bericht'],
                 'VerzondenDatum' => null,
+                'Status' => $validated['Status'],
                 'Isactief' => 0,
 
             ]);
