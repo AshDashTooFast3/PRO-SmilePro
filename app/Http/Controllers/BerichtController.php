@@ -114,7 +114,7 @@ class BerichtController extends Controller
         ]);
 
         $patient = Patient::find($validated['PatientId']);
-        
+
         if ($patient && $patient->Isactief == 0) {
             Log::warning('Probeer bericht bij te werken voor inactieve patiënt', ['PatientId' => $validated['PatientId']]);
 
@@ -148,6 +148,16 @@ class BerichtController extends Controller
 
     public function destroy($Id)
     {
+        $bericht = Communicatie::find($Id);
+        // dd($bericht);
+        $patient = Patient::find($bericht->PatientId);
+
+        if ($patient && $patient->Isactief == 1) {
+            Log::warning('Probeer bericht te annuleren voor inactieve patiënt', ['PatientId' => $patient->Id]);
+
+            return redirect()->route('berichten.index')->with('error', 'Je kunt geen bericht annuleren voor een patiënt die nog actief is bij ons bedrijf. wij raden u aan om het bericht te wijzigen i.p.v. te annuleren.');
+        }
+
         $result = Communicatie::DeleteBericht((int) $Id);
 
         if ($result === true) {
