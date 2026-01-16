@@ -1,8 +1,8 @@
--- DROP DATABASE IF EXISTS SmilePro;
+-- DROP DATABASE IF EXISTS smilepro;
 -- 
--- CREATE DATABASE SmilePro;
+-- CREATE DATABASE smilepro;
 
-USE SmilePro;
+USE smilepro;
 
 /* ======================================================
     CREATE TABLES

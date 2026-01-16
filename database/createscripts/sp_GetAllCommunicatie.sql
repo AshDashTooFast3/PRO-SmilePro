@@ -1,4 +1,4 @@
-USE SmilePro;
+USE smilepro;
 
 DROP PROCEDURE IF EXISTS sp_GetAllCommunicatie;
 
