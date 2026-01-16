@@ -158,10 +158,10 @@ class BerichtController extends Controller
     {
         $bericht = Communicatie::find($Id);
 
-        if ($bericht->Status === 'In behandeling') {
+        if ($bericht->Status === 'Onbetaald') {
             Log::warning('Probeer bericht te annuleren voor een patient die in behandeling is', ['PatientId' => $bericht->PatientId]);
 
-            return redirect()->route('berichten.index')->with('error', 'Je kunt geen bericht annuleren voor een patiënt die nog in behandeling is. wij raden u aan om het bericht te wijzigen i.p.v. te annuleren.');
+            return redirect()->route('berichten.index')->with('error', 'Je kunt geen onbetaald factuur annuleren van een patiënt');
         }
 
         $result = Communicatie::DeleteBericht((int) $Id);
