@@ -46,6 +46,9 @@
                                     <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-s font-medium">
                                         Verzonden datum
                                     </th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-s font-medium">
+                                        Status
+                                    </th>
                                     <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
                                         Wijzigen
                                     </th>
@@ -76,6 +79,9 @@
                                             @else
                                                 {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
                                             @endif
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $bericht->Status }}
                                         </td>
                                     <td class="px-6 py-4 text-center">
                                         <a href="{{ route('berichten.edit', $bericht->Id) }}"

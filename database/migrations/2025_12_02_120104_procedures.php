@@ -94,6 +94,7 @@ return new class extends Migration
                 COM.MedewerkerId,
                 COM.Bericht,
                 COM.VerzondenDatum,
+                COM.Status,
                 COM.Isactief,
 
                 -- Patient info

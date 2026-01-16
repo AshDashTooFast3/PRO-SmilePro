@@ -22,6 +22,7 @@ class CommunicatieFactory extends Factory
             'MedewerkerId' => Medewerker::factory(),
             'Bericht' => $this->faker->sentence(),
             'VerzondenDatum' => null,
+            'Status' => $this->faker->randomElement(['Betaald', 'Onbetaald', 'In behandeling', 'Afgehandeld']),
             'Isactief' => true,
             'Opmerking' => $this->faker->optional()->sentence(),
             'Datumaangemaakt' => now(),

@@ -118,7 +118,7 @@ class BerichtController extends Controller
         if ($patient && $patient->Isactief == 0) {
             Log::warning('Probeer bericht bij te werken voor inactieve patiënt', ['PatientId' => $validated['PatientId']]);
 
-            return redirect()->route('berichten.index')->with('error', 'Je kunt geen bericht bijwerken voor een patiënt die volledig is behandeld 
+            return redirect()->route('berichten.index')->with('error', 'Je kunt geen bericht bijwerken met een patiënt die volledig is behandeld 
             en geen actieve status meer heeft bij ons bedrijf. wij raden u aan om het bericht te annuleren i.p.v. bij te werken.');
         }
 

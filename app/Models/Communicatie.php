@@ -21,6 +21,7 @@ class Communicatie extends Model
         'MedewerkerId',
         'Bericht',
         'VerzondenDatum',
+        'Status',
         'Isactief',
         'Opmerking',
         'Datumaangemaakt',
