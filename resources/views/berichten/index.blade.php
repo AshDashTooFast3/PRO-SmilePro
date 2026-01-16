@@ -94,7 +94,7 @@
                                         <form method="POST" action="{{ route('berichten.destroy', $bericht->Id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="px-3 py-2 bg-red-600 text-white rounded text-sm">
+                                            <button class="px-3 py-2 bg-red-600 text-white rounded text-sm" onclick="return confirm('Weet je zeker dat je dit bericht wilt annuleren? Dit kan niet ongedaan worden gemaakt.')">
                                                 Annuleren
                                             </button>
                                         </form>
