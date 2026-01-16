@@ -34,22 +34,22 @@
                         <table class="min-w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
-                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
                                         Patient
                                     </th>
-                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
                                         Medewerker
                                     </th>
-                                    <th class="w-2/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                    <th class="w-2/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
                                         Bericht
                                     </th>
-                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-xs font-medium">
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-s font-medium">
                                         Verzonden datum
                                     </th>
-                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
                                         Wijzigen
                                     </th>
-                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-xs font-medium">
+                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
                                         Annuleren
                                     </th>
                                 </tr>
