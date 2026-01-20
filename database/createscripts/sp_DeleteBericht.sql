@@ -1,16 +1,17 @@
 USE smilepro;
 
-DROP PROCEDURE IF EXISTS sp_DeleteBericht;
+DROP PROCEDURE IF EXISTS sp_DeleteCommunicatie;
 
 DELIMITER $$
 
-CREATE PROCEDURE sp_DeleteBericht (
-    IN CommunicatieId INT
+CREATE PROCEDURE sp_DeleteCommunicatie(
+    IN p_Id int
 )
-
 BEGIN
-    DELETE FROM Communicatie c 
-    WHERE Id = CommunicatieId;
+
+    DELETE FROM Communicatie 
+    WHERE Id = p_Id;
+
 END$$
 
 DELIMITER ;

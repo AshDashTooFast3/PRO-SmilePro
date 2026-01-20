@@ -21,6 +21,7 @@ class Communicatie extends Model
         'MedewerkerId',
         'Bericht',
         'VerzondenDatum',
+        'Status',
         'Isactief',
         'Opmerking',
         'Datumaangemaakt',
@@ -29,17 +30,17 @@ class Communicatie extends Model
 
     // pakt alle berichten en eventuele errors
 
-    public function getAllCommunicatie(): array
+    public function getAllBerichten(): array
     {
         try {
-            $result = DB::select('CALL sp_GetAllCommunicatie()');
+            $result = DB::select('CALL sp_getAllBerichten()');
 
             if (is_null($result)) {
-                Log::warning('sp_GetAllCommunicatie retourneerde null.');
+                Log::warning('sp_getAllBerichten retourneerde null.');
 
                 return [];
             } elseif (empty($result)) {
-                Log::info('sp_GetAllCommunicatie retourneerde een lege array.');
+                Log::info('sp_getAllBerichten retourneerde een lege array.');
 
                 return [];
             }
@@ -53,19 +54,42 @@ class Communicatie extends Model
         }
     }
 
-    public static function DeleteBericht(int $berichtId): bool
+    public static function DeleteBericht(int $Id): bool
     {
-       try {
-        if (empty($berichtId) || $berichtId <= 0) {
-            Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $berichtId]);
+        try {
+            if (empty($Id) || $Id <= 0 || $Id === null) {
+                Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $Id]);
+
+                return false;
+            }
+
+            DB::select('CALL sp_DeleteBericht(?)', [$Id]);
+
+            Log::info("Bericht Id {$Id} succesvol verwijderd.");
+            return true;
+
+        } catch (\Exception $e) {
+            Log::error("Fout bij het verwijderen van bericht Id {$Id}: {$e->getMessage()}");
+
             return false;
         }
-            DB::statement('CALL sp_DeleteCommunicatie(?)', [$berichtId]);
+    }
 
-            Log::info('Bericht Id '.$berichtId.' succesvol verwijderd.');
+    public static function WijzigBericht(int $Id, int $PatientId, int $MedewerkerId, string $Bericht, string $Status): bool
+    {
+        try {
+            if (empty($Id) || $Id <= 0 || $Id === null) {
+                Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $Id]);
+
+                return false;
+            }
+
+            DB::select('CALL sp_WijzigBericht(?, ?, ?, ?, ?)', [$Id, $PatientId, $MedewerkerId, $Bericht, $Status ]);
+            Log::info("Bericht Id {$Id} succesvol gewijzigd.");
             return true;
+
         } catch (\Exception $e) {
-            Log::error('Fout bij het verwijderen van bericht Id '.$berichtId.': '.$e->getMessage());
+            Log::error("Fout bij het wijzigen van bericht Id {$Id}: {$e->getMessage()}");
 
             return false;
         }

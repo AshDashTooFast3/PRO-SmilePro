@@ -10,11 +10,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <span class="text-gray-900 dark:text-gray-100">{{ $title }}</span>
-                    
-                    <? echo str_repeat('<br>', 2); ?>
+
+                    {!! str_repeat('<br>', 2) !!}
 
                     <a href="{{ route('berichten.create') }}"
-                       class="inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
+                        class="inline-block px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition">
                         Nieuw Bericht aanmaken
                     </a>
 
@@ -26,26 +26,35 @@
                     @elseif(session('error'))
                         <div class="mt-4 p-4 bg-red-300 border border-red-400 text-red-900 rounded">
                             {{ session('error') }}
-                            <meta http-equiv="refresh" content="3;url={{ route('berichten.index') }}">
+                            <meta http-equiv="refresh" content="8;url={{ route('berichten.index') }}">
                         </div>
                     @endif
-                    
+
                     <div class="mt-6">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <table class="min-w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Patient</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Medewerker</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Bericht</th>
-                                    <th
-                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        Verzonden Datum</th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
+                                        Patient
+                                    </th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
+                                        Medewerker
+                                    </th>
+                                    <th class="w-2/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
+                                        Bericht
+                                    </th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-s font-medium">
+                                        Verzonden datum
+                                    </th>
+                                    <th class="w-1/6 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white  text-s font-medium">
+                                        Status
+                                    </th>
+                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
+                                        Wijzigen
+                                    </th>
+                                    <th class="w-1/12 px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-white text-s font-medium">
+                                        Annuleren
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -61,17 +70,41 @@
                                             {{ $bericht->MedewerkerTussenvoegsel }}
                                             {{ $bericht->MedewerkerAchternaam }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                        <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100 break-words whitespace-normal">
                                             {{ $bericht->Bericht }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                            {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
+                                            @if ($bericht->VerzondenDatum === null)
+                                                <span class="text-yellow-600 font-semibold">Niet verzonden</span>
+                                            @else
+                                                {{ \Carbon\Carbon::parse($bericht->VerzondenDatum)->format('d-m-Y H:i') }}
+                                            @endif
                                         </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $bericht->Status }}
+                                        </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <a href="{{ route('berichten.edit', $bericht->Id) }}"
+                                            class="inline-block px-3 py-2 bg-blue-600 text-white rounded text-sm">
+                                            Wijzigen
+                                        </a>
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center">
+                                        <form method="POST" action="{{ route('berichten.destroy', $bericht->Id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="px-3 py-2 bg-red-600 text-white rounded text-sm" onclick="return confirm('Weet je zeker dat je dit bericht wilt annuleren? Dit kan niet ongedaan worden gemaakt.')">
+                                                Annuleren
+                                            </button>
+                                        </form>
+                                    </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4"
-                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen berichten gevonden.</td>
+                                        <td colspan="6"
+                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">Geen
+                                            berichten gevonden.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

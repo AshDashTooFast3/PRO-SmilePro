@@ -12,7 +12,7 @@ return new class extends Migration
     {
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_getVolledigeNaamPatienten');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAfsprakenCount');
-        DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllCommunicatie');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllBerichten');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_OmzetBerekenen');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllFactuur');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_DeleteBericht');
@@ -42,42 +42,6 @@ return new class extends Migration
             SELECT COUNT(*) AS AfsprakenCount
             FROM Afspraken;
         END;
-    ');
-
-        DB::unprepared('
-
-        CREATE PROCEDURE sp_GetAllCommunicatie()
-        BEGIN
-            SELECT 
-                COM.Id,
-                COM.PatientId,
-                COM.MedewerkerId,
-                COM.Bericht,
-                COM.VerzondenDatum,
-                COM.Isactief,
-
-                -- Patient info
-                PAT.Nummer AS PatientNummer,
-                PER_PAT.Voornaam AS PatientVoornaam,
-                PER_PAT.Tussenvoegsel AS PatientTussenvoegsel,
-                PER_PAT.Achternaam AS PatientAchternaam,
-
-                -- Medewerker info
-                MED.Nummer AS MedewerkerNummer,
-                PER_MED.Voornaam AS MedewerkerVoornaam,
-                PER_MED.Tussenvoegsel AS MedewerkerTussenvoegsel,
-                PER_MED.Achternaam AS MedewerkerAchternaam
-
-            FROM Communicatie COM
-            
-            INNER JOIN Medewerker MED ON COM.MedewerkerId = MED.Id
-            INNER JOIN Persoon PER_MED ON MED.PersoonId = PER_MED.Id
-            INNER JOIN Patient PAT ON COM.PatientId = PAT.Id
-            INNER JOIN Persoon PER_PAT ON PAT.PersoonId = PER_PAT.Id;
-        END;
-
-        
-
     ');
         DB::unprepared('
         DROP PROCEDURE IF EXISTS sp_OmzetBerekenen;
@@ -119,8 +83,49 @@ return new class extends Migration
                 ORDER BY f.Datum DESC;
             END
         ');
+    
+    //Berichten stored procedures
 
         DB::unprepared('
+
+        CREATE PROCEDURE sp_GetAllBerichten()
+        BEGIN
+            SELECT 
+                COM.Id,
+                COM.PatientId,
+                COM.MedewerkerId,
+                COM.Bericht,
+                COM.VerzondenDatum,
+                COM.Status,
+                COM.Isactief,
+
+                -- Patient info
+                PAT.Nummer AS PatientNummer,
+                PER_PAT.Voornaam AS PatientVoornaam,
+                PER_PAT.Tussenvoegsel AS PatientTussenvoegsel,
+                PER_PAT.Achternaam AS PatientAchternaam,
+
+                -- Medewerker info
+                MED.Nummer AS MedewerkerNummer,
+                PER_MED.Voornaam AS MedewerkerVoornaam,
+                PER_MED.Tussenvoegsel AS MedewerkerTussenvoegsel,
+                PER_MED.Achternaam AS MedewerkerAchternaam
+
+            FROM Communicatie COM
+            
+            INNER JOIN Medewerker MED ON COM.MedewerkerId = MED.Id
+            INNER JOIN Persoon PER_MED ON MED.PersoonId = PER_MED.Id
+            INNER JOIN Patient PAT ON COM.PatientId = PAT.Id
+            INNER JOIN Persoon PER_PAT ON PAT.PersoonId = PER_PAT.Id;
+        END;
+
+        
+
+    ');
+
+        DB::unprepared('
+        
+
         DROP PROCEDURE IF EXISTS sp_DeleteBericht;
 
 
@@ -133,6 +138,30 @@ return new class extends Migration
             WHERE Id = CommunicatieId;
         END
 
+        ');
+
+        DB::unprepared('
+        
+        DROP PROCEDURE IF EXISTS sp_WijzigBericht;
+
+        CREATE PROCEDURE sp_WijzigBericht (
+            IN CommunicatieId INT,
+            IN PatientId INT,
+            IN MedewerkerId INT,
+            IN Bericht VARCHAR(255),
+            IN Status ENUM(\'Betaald\', \'Onbetaald\', \'In behandeling\', \'Afgehandeld\')
+        )
+
+        BEGIN
+            UPDATE Communicatie 
+            SET 
+                PatientId = PatientId,
+                MedewerkerId = MedewerkerId,
+                Bericht = Bericht,
+                VerzondenDatum = NULL,
+                Status = Status
+            WHERE Id = CommunicatieId;
+        END
         ');
     }
 
