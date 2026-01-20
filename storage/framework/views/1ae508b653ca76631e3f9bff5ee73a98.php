@@ -63,6 +63,45 @@
                     </strong>
                     <br>
                 </div>
+            <div class="p-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <strong>
+                    <p class="text-white p-4 text-2xl">
+                        Meest voorkomende behandelingen:
+                    </p>
+                </strong>
+                <?php if(!empty($meestVoorkomendeBehhandelingen) && count($meestVoorkomendeBehhandelingen) > 0): ?>
+                    <div class="p-4">
+                        <table class="w-full text-gray-100">
+                            <thead class="border-b border-gray-700">
+                                <tr>
+                                    <th class="text-left py-2">Behandeling</th>
+                                    <th class="text-right py-2">Aantal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $meestVoorkomendeBehhandelingen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $behandeling): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr class="border-b border-gray-700 hover:bg-gray-700">
+                                        <td class="py-3 px-2"><?php echo e($behandeling->naam); ?></td>
+                                        <td class="text-right py-3 px-2">
+                                            <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">
+                                                <?php echo e($behandeling->aantal); ?>
+
+                                            </span>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php else: ?>
+                    <div class="p-4">
+                        <span style="color: #ffa600ff;">
+                            Er zijn nog geen behandelingen uitgevoerd
+                        </span>
+                    </div>
+                <?php endif; ?>
+                <br>
+            </div>
             </div>
         </div>
     </div>
