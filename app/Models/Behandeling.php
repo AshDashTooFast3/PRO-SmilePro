@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-const CREATED_AT = 'Datumaangemaakt';
-const UPDATED_AT = 'Datumgewijzigd';
-
 class Behandeling extends Model
 {
     /** @use HasFactory<\Database\Factories\BehandelingFactory> */
     use HasFactory;
+    const CREATED_AT = 'Datumaangemaakt';
+    const UPDATED_AT = 'Datumgewijzigd';
 
     protected $table = 'Behandeling';
 
@@ -29,11 +28,7 @@ class Behandeling extends Model
         'Datumaangemaakt',
         'Datumgewijzigd',
     ];
-
-    const CREATED_AT = 'Datumaangemaakt';
-
-    const UPDATED_AT = 'Datumgewijzigd';
-
+    
     public function medewerker()
     {
         return $this->belongsTo(Medewerker::class, 'MedewerkerId');
