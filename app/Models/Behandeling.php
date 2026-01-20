@@ -15,7 +15,32 @@ class Behandeling extends Model
 
     protected $table = 'Behandeling';
 
+    protected $fillable = [
+        'MedewerkerId',
+        'PatientId',
+        'Datum',
+        'Tijd',
+        'Behandelingtype',
+        'Omschrijving',
+        'Kosten',
+        'Status',
+        'Isactief',
+        'Opmerking',
+        'Datumaangemaakt',
+        'Datumgewijzigd',
+    ];
+
     const CREATED_AT = 'Datumaangemaakt';
 
     const UPDATED_AT = 'Datumgewijzigd';
+
+    public function medewerker()
+    {
+        return $this->belongsTo(Medewerker::class, 'MedewerkerId');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'PatientId');
+    }
 }
