@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Communicatie;
 use App\Models\Medewerker;
 use App\Models\Patient;
+use App\Models\Persoon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -36,13 +37,49 @@ class BerichtController extends Controller
         ]);
     }
 
+    public function sturen($Id)
+    {
+        $bericht = Communicatie::find($Id);
+
+        if (! $bericht) {
+            Log::error('Bericht niet gevonden voor verzending', ['BerichtId' => $Id]);
+
+            return redirect()->route('berichten.index')->with('error', 'Bericht niet gevonden.');
+        }
+
+        // Hier zou je de logica toevoegen om het bericht daadwerkelijk te verzenden
+        // Bijvoorbeeld via e-mail of een ander communicatiemiddel
+
+        // Voor nu loggen we alleen dat het bericht is "verzonden"
+        $bericht->update(['VerzondenDatum' => now(), 'Status' => 'Verzonden']);
+
+        Log::info('Bericht verzonden', ['BerichtId' => $Id]);
+
+        // Haal het medewerker naam en patient naam op voor de melding
+        $medewerker = Medewerker::find($bericht->MedewerkerId);
+        $patient = Patient::find($bericht->PatientId);
+
+        $PersoonMedewerker = Persoon::find($medewerker->PersoonId);
+        $PersoonPatient = Persoon::find($patient->PersoonId);
+
+        return redirect()->route('berichten.index')->with('success', 'Bericht succesvol verzonden naar 
+        '.$PersoonMedewerker->Voornaam.' 
+        '.($PersoonMedewerker->Tussenvoegsel ?? '').' 
+        '.$PersoonMedewerker->Achternaam.' 
+                en 
+        '.$PersoonPatient->Voornaam.'
+        '.($PersoonPatient->Tussenvoegsel ?? '').'
+        '.$PersoonPatient->Achternaam.'.');
+
+
+    }
+
     public function create()
     {
         // Haalt alle patienten en medewerkers op voor de dropdowns
         $patienten = Patient::all();
         $medewerkers = Medewerker::all();
-        $bericht = new Communicatie();
-
+        $bericht = new Communicatie;
 
         return view('berichten.create', [
             'title' => 'Nieuw Bericht Aanmaken',

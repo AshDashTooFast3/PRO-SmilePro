@@ -16,6 +16,10 @@ Route::get('/berichten', [BerichtController::class, 'index'])
     ->name('berichten.index')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+Route::get('/berichten/{id}/sturen', [BerichtController::class, 'sturen'])
+    ->name('berichten.sturen')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 Route::get('/berichten/create', [BerichtController::class, 'create'])
     ->name('berichten.create')
     ->middleware(['auth', 'role:praktijkmanagement']);
