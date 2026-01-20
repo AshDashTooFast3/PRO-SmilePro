@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Behandeling extends Model
 {
@@ -28,6 +29,11 @@ class Behandeling extends Model
         'Datumaangemaakt',
         'Datumgewijzigd',
     ];
+
+    public function VoorkomendeBehandelingen()
+    {
+        return DB::SELECT('CALL sp_getVoorkomendeBehandelingen()');
+    }
     
     public function medewerker()
     {
