@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Afspraken;
 use App\Models\Communicatie;
 use App\Models\Factuur;
+use App\Models\Behandeling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PraktijkmanagementController extends Controller
 {
     private $communicatie;
-
     private $factuur;
+    private $behandeling;
 
     public function __construct()
     {
         $this->communicatie = new Communicatie;
         $this->factuur = new Factuur;
+        $this->behandeling = new Behandeling;
     }
 
     public function index()
@@ -28,6 +30,9 @@ class PraktijkmanagementController extends Controller
 
         // haalt het geld bedrag op van de facuturen
         $omzet = $this->factuur->BerekenOmzet();
+
+        // haalt het aantal voorkomende behandelingen op
+        $voorkomendeBehandelingen = $this->behandeling->VoorkomendeBehandelingen();
 
         // log voor het aantal afspraken
         if ($aantalAfspraken > 0) {
@@ -43,10 +48,17 @@ class PraktijkmanagementController extends Controller
             Log::info('er is nog geen omzet gemaakt');
         }
 
+        if (count($voorkomendeBehandelingen) > 0) {
+            Log::info('Voorkomende behandelingen opgehaald', ['Aantal voorkomende behandelingen:', count($voorkomendeBehandelingen)]);
+        } else {
+            Log::info('Geen voorkomende behandelingen gevonden');
+        }
+
         return view('praktijkmanagement.index', [
             'title' => 'Praktijkmanagement Dashboard',
             'aantalAfspraken' => $aantalAfspraken,
             'omzet' => $omzet,
+            'voorkomendeBehandelingen' => $voorkomendeBehandelingen,
         ]);
     }
 }
