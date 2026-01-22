@@ -50,6 +50,9 @@
                         <x-nav-link :href="route('factuur.factuurPatient')" :active="request()->routeIs('factuur.factuurPatient')">
                             {{ _('Mijn Facturen') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('berichten.berichtenPatient')" :active="request()->routeIs('berichten.berichtenPatient')">
+                            {{ _('Mijn Berichten') }}
+                        </x-nav-link>
                     </div>
                 @endif
 

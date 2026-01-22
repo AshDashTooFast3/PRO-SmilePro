@@ -73,6 +73,10 @@ Route::post('/Patient-toevoegen-update', [patientenController::class, 'update'])
     ->name('patienten.toevoegen-update')
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist']);
 
+Route::get('/berichtenPatient', [BerichtController::class, 'berichtenPatient'])
+    ->name('berichten.berichtenPatient')
+    ->middleware(['auth', 'role:patient']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

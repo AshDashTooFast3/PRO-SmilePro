@@ -89,6 +89,15 @@ class BerichtController extends Controller
         }
     }
 
+    public function berichtenPatient()
+    {
+        
+
+        return view('berichten.berichtenPatient', [
+            'title' => 'Mijn Berichten Overzicht',
+        ]);
+    }
+
     public function create()
     {
         // Haalt alle patienten en medewerkers op voor de dropdowns
