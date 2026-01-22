@@ -16,7 +16,7 @@ return new class extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_OmzetBerekenen');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_GetAllFactuur');
         DB::unprepared('DROP PROCEDURE IF EXISTS sp_DeleteBericht');
-        
+
         DB::unprepared("
         CREATE PROCEDURE sp_getVolledigeNaamPatienten()
         BEGIN
@@ -83,8 +83,8 @@ return new class extends Migration
                 ORDER BY f.Datum DESC;
             END
         ');
-    
-    //Berichten stored procedures
+
+        // Berichten stored procedures
 
         DB::unprepared('
 
@@ -144,25 +144,25 @@ return new class extends Migration
         
         DROP PROCEDURE IF EXISTS sp_WijzigBericht;
 
-        CREATE PROCEDURE sp_WijzigBericht (
-            IN CommunicatieId INT,
-            IN PatientId INT,
-            IN MedewerkerId INT,
-            IN Bericht VARCHAR(255),
-            IN VerzondenDatum DATETIME DEFAULT NULL,
-            IN Status ENUM(\'Betaald\', \'Onbetaald\', \'In behandeling\', \'Afgehandeld\', \'Verzonden\')
+        CREATE PROCEDURE sp_WijzigBericht(
+            IN p_Id INT,
+            IN p_PatientId INT,
+            IN p_MedewerkerId INT,
+            IN p_Bericht VARCHAR(255),
+            IN p_VerzondenDatum VARCHAR(12) DEFAULT NULL,
+            IN p_Status VARCHAR(30) DEFAULT "In behandeling"
         )
-
         BEGIN
-            UPDATE Communicatie 
-            SET 
-                PatientId = PatientId,
-                MedewerkerId = MedewerkerId,
-                Bericht = Bericht,
-                VerzondenDatum = NULL,
-                Datumgewijzigd = NOW(),
-                Status = Status
-            WHERE Id = CommunicatieId;
+            UPDATE Communicatie
+            
+            SET PatientId = p_PatientId,
+                MedewerkerId = p_MedewerkerId,
+                Bericht = p_Bericht,
+                VerzondenDatum = p_VerzondenDatum,
+                Status = p_Status
+                
+            WHERE Id = p_Id;
+
         END
         ');
     }
@@ -170,7 +170,5 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void {
-       
-    }
+    public function down(): void {}
 };

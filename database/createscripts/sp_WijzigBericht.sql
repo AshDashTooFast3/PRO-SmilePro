@@ -8,8 +8,7 @@ CREATE PROCEDURE sp_WijzigBericht(
     IN p_MedewerkerId INT,
     IN p_Bericht VARCHAR(255),
     IN p_VerzondenDatum VARCHAR(12) DEFAULT NULL,
-    IN p_Status ENUM('Betaald', 'Onbetaald', 'In behandeling', 'Afgehandeld', 'Verzonden', 'Openstaand') DEFAULT 'Openstaand'
-
+    IN p_Status VARCHAR(30) DEFAULT 'In behandeling'
 )
 BEGIN
     UPDATE Communicatie

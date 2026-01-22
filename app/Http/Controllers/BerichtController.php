@@ -58,29 +58,35 @@ class BerichtController extends Controller
         $medewerker = Medewerker::find($bericht->MedewerkerId);
         $patient = Patient::find($bericht->PatientId);
 
-       $sturen = Communicatie::WijzigBericht(
-            (int) $bericht->Id,
-            (int) $bericht->PatientId,
-            (int) $bericht->MedewerkerId,
+        $sturen = Communicatie::WijzigBericht(
+            $bericht->Id,
+            $bericht->PatientId,
+            $bericht->MedewerkerId,
             $bericht->Bericht,
-            now(),
+            date('Y-m-d'),
             'Verzonden'
         );
 
-        dd($sturen);
-
+        // Haal de persoonsgegevens op voor de medewerker en patient voor de succesmelding
         $PersoonMedewerker = Persoon::find($medewerker->PersoonId);
         $PersoonPatient = Persoon::find($patient->PersoonId);
 
-        return redirect()->route('berichten.index')->with('success', 'Bericht succesvol verzonden naar 
-        '.$PersoonMedewerker->Voornaam.' 
-        '.($PersoonMedewerker->Tussenvoegsel ?? '').' 
-        '.$PersoonMedewerker->Achternaam.' 
-                en 
-        '.$PersoonPatient->Voornaam.'
-        '.($PersoonPatient->Tussenvoegsel ?? '').'
-        '.$PersoonPatient->Achternaam.'.');
+        if ($sturen === false) {
+            Log::error('Fout bij het bijwerken van bericht status na verzending', ['BerichtId' => $Id]);
 
+            return redirect()->route('berichten.index')->with('error', 'Fout bij het bijwerken van bericht status na verzending.');
+        } else {
+            Log::info('Bericht status bijgewerkt naar Verzonden na verzending', ['BerichtId' => $Id]);
+
+            return redirect()->route('berichten.index')->with('success', 'Bericht succesvol verzonden naar 
+            '.$PersoonMedewerker->Voornaam.' 
+            '.($PersoonMedewerker->Tussenvoegsel ?? '').' 
+            '.$PersoonMedewerker->Achternaam.' 
+                    en 
+            '.$PersoonPatient->Voornaam.'
+            '.($PersoonPatient->Tussenvoegsel ?? '').'
+            '.$PersoonPatient->Achternaam.'.');
+        }
     }
 
     public function create()
@@ -181,6 +187,7 @@ class BerichtController extends Controller
             (int) $validated['PatientId'],
             (int) $validated['MedewerkerId'],
             $validated['Bericht'],
+            date('Y-m-d'),
             $validated['Status']
         );
 
