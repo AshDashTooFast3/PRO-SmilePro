@@ -43,15 +43,13 @@
                                         <tr class="hover:bg-gray-700">
                                             <td class="px-4 py-3">{{ $m->Nummer }}</td>
                                             <td class="px-4 py-3">
-                                                @if($m->persoon)
-                                                    {{ $m->persoon->Voornaam }}
-                                                    @if($m->persoon->Tussenvoegsel)
-                                                        {{ $m->persoon->Tussenvoegsel }}
-                                                    @endif
-                                                    {{ $m->persoon->Achternaam }}
-                                                @else
-                                                    <em>Onbekend</em>
-                                                @endif
+                                            @if ($m->persoon)
+                                                {{ $m->persoon->Voornaam }} 
+                                                {{ $m->persoon->Tussenvoegsel ?? '' }}
+                                                {{ $m->persoon->Achternaam }}
+                                            @else
+                                                N/A
+                                            @endif
                                             </td>
                                             <td class="px-4 py-3">{{ $m->Medewerkertype }}</td>
                                             <td class="px-4 py-3">{{ $m->Specialisatie ?? '-' }}</td>

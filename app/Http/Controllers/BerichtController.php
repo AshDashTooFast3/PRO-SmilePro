@@ -51,13 +51,23 @@ class BerichtController extends Controller
         // Bijvoorbeeld via e-mail of een ander communicatiemiddel
 
         // Voor nu loggen we alleen dat het bericht is "verzonden"
-        $bericht->update(['VerzondenDatum' => now(), 'Status' => 'Verzonden']);
 
         Log::info('Bericht verzonden', ['BerichtId' => $Id]);
 
         // Haal het medewerker naam en patient naam op voor de melding
         $medewerker = Medewerker::find($bericht->MedewerkerId);
         $patient = Patient::find($bericht->PatientId);
+
+       $sturen = Communicatie::WijzigBericht(
+            (int) $bericht->Id,
+            (int) $bericht->PatientId,
+            (int) $bericht->MedewerkerId,
+            $bericht->Bericht,
+            now(),
+            'Verzonden'
+        );
+
+        dd($sturen);
 
         $PersoonMedewerker = Persoon::find($medewerker->PersoonId);
         $PersoonPatient = Persoon::find($patient->PersoonId);
@@ -70,7 +80,6 @@ class BerichtController extends Controller
         '.$PersoonPatient->Voornaam.'
         '.($PersoonPatient->Tussenvoegsel ?? '').'
         '.$PersoonPatient->Achternaam.'.');
-
 
     }
 

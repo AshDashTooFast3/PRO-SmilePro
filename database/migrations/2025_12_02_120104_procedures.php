@@ -149,7 +149,8 @@ return new class extends Migration
             IN PatientId INT,
             IN MedewerkerId INT,
             IN Bericht VARCHAR(255),
-            IN Status ENUM(\'Betaald\', \'Onbetaald\', \'In behandeling\', \'Afgehandeld\')
+            IN VerzondenDatum DATETIME DEFAULT NULL,
+            IN Status ENUM(\'Betaald\', \'Onbetaald\', \'In behandeling\', \'Afgehandeld\', \'Verzonden\')
         )
 
         BEGIN
@@ -159,6 +160,7 @@ return new class extends Migration
                 MedewerkerId = MedewerkerId,
                 Bericht = Bericht,
                 VerzondenDatum = NULL,
+                Datumgewijzigd = NOW(),
                 Status = Status
             WHERE Id = CommunicatieId;
         END

@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MedewerkerOverzichtModel;
+use App\Models\Medewerker;
 use Illuminate\Support\Facades\Log;
-
 
 class MedewerkerOverzichtController extends Controller
 {
     public function index()
     {
-        $medewerkers = MedewerkerOverzichtModel::with('persoon')->get();
+        $medewerkers = Medewerker::with('persoon')->get();
 
         if ($medewerkers->isEmpty()) {
             Log::info('Geen medewerkers beschikbaar.');

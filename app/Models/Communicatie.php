@@ -66,6 +66,7 @@ class Communicatie extends Model
             DB::select('CALL sp_DeleteBericht(?)', [$Id]);
 
             Log::info("Bericht Id {$Id} succesvol verwijderd.");
+
             return true;
 
         } catch (\Exception $e) {
@@ -75,17 +76,18 @@ class Communicatie extends Model
         }
     }
 
-    public static function WijzigBericht(int $Id, int $PatientId, int $MedewerkerId, string $Bericht, string $Status): bool
+    public static function WijzigBericht(int $Id, int $PatientId, int $MedewerkerId, string $Bericht, string $VerzondenDatum, string $Status): bool
     {
         try {
             if (empty($Id) || $Id <= 0 || $Id === null) {
-                Log::warning('Ongeldig bericht Id opgegeven voor verwijdering', ['BerichtId' => $Id]);
+                Log::warning('Ongeldig bericht Id opgegeven voor wijziging', ['BerichtId' => $Id]);
 
                 return false;
             }
 
-            DB::select('CALL sp_WijzigBericht(?, ?, ?, ?, ?)', [$Id, $PatientId, $MedewerkerId, $Bericht, $Status ]);
+            DB::select('CALL sp_WijzigBericht(?, ?, ?, ?, ?, ?)', [$Id, $PatientId, $MedewerkerId, $Bericht, $VerzondenDatum, $Status]);
             Log::info("Bericht Id {$Id} succesvol gewijzigd.");
+
             return true;
 
         } catch (\Exception $e) {
