@@ -158,7 +158,7 @@
                     </div>
                 <?php endif; ?>
 
-                <?php if(Auth::check() && in_array(Auth::user()->RolNaam, ['Patient', 'Praktijkmanagement'])): ?>
+                <?php if(Auth::check() && in_array(Auth::user()->RolNaam, ['Patient'])): ?>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <?php if (isset($component)) { $__componentOriginalc295f12dca9d42f28a259237a5724830 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalc295f12dca9d42f28a259237a5724830 = $attributes; } ?>

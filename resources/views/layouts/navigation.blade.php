@@ -45,7 +45,7 @@
                     </div>
                 @endif
 
-                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Patient', 'Praktijkmanagement']))
+                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Patient']))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('factuur.factuurPatient')" :active="request()->routeIs('factuur.factuurPatient')">
                             {{ _('Mijn Facturen') }}
