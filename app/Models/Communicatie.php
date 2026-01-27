@@ -30,6 +30,30 @@ class Communicatie extends Model
 
     // pakt alle berichten en eventuele errors
 
+    public static function getBerichtenVoorPatient(int $PatientId): array
+    {
+        try {
+            $result = DB::select('CALL sp_GetBerichtenVoorPatient(?)', [$PatientId]);
+
+            if (is_null($result)) {
+                Log::warning('sp_GetBerichtenVoorPatient retourneerde null.');
+
+                return [];
+            } elseif (empty($result)) {
+                Log::info('sp_GetBerichtenVoorPatient retourneerde een lege array.');
+
+                return [];
+            }
+
+            return $result;
+
+        } catch (\Exception $e) {
+            Log::error('Fout in getBerichtenVoorPatient: '.$e->getMessage());
+
+            return [];
+        }
+    }
+
     public function getAllBerichten(): array
     {
         try {

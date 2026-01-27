@@ -89,14 +89,26 @@ class BerichtController extends Controller
         }
     }
 
-    public function berichtenPatient()
+        public function berichtenPatient()
     {
-        
+        $gebruikerId = auth()->id();
+
+        $persoon = Persoon::where('GebruikerId', $gebruikerId)->firstOrFail();
+
+        $patient = $persoon->patient;
+
+        if (!$patient) {
+            abort(404, 'Geen patiënt gekoppeld aan deze gebruiker.');
+        }
+
+        $berichten = Communicatie::getBerichtenVoorPatient($patient->Id);
 
         return view('berichten.berichtenPatient', [
             'title' => 'Mijn Berichten Overzicht',
+            'berichten' => $berichten,
         ]);
     }
+
 
     public function create()
     {

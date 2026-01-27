@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Communicatie;
 use App\Models\Gebruiker;
 use App\Models\Persoon;
 use App\Models\Patient;
@@ -25,13 +26,27 @@ class DatabaseSeeder extends Seeder
             'RolNaam' => 'Praktijkmanagement',
         ]);
 
-         Gebruiker::factory()->create([
+        $gebruiker = Gebruiker::factory()->create([
             'Gebruikersnaam' => 'Patient',
             'Email' => 'patient@smilepro.nl',
             'Wachtwoord' => bcrypt('achraf123'),
             'RolNaam' => 'Patient',
         ]);
 
+        Persoon::factory()->create([
+            'GebruikerId' => $gebruiker->Id,
+            'Voornaam' => 'Wesley',
+            'Tussenvoegsel' => '',
+            'Achternaam' => 'Borgman',
+            'Geboortedatum' => '2003-01-01',
+        ]);
+
+        Patient::factory()->create([
+            'PersoonId' => Persoon::where('Voornaam', 'Wesley')
+            ->where('Achternaam', 'Borgman')
+            ->first()->Id,
+        ]);
+         
         // Unhappy scenarios testen met deze inactieve gebruiker
         Gebruiker::factory()->create([
             'Gebruikersnaam' => 'Achraf El Arrasi',
@@ -63,5 +78,19 @@ class DatabaseSeeder extends Seeder
         $this->call(BehandelingSeeder::class);
         $this->call(FactuurSeeder::class);
 
+        //test bericht voor patient Wesley Borgman
+        Communicatie::factory(2)->create([
+            'PatientId' => Patient::where('PersoonId', 
+            Persoon::where('Voornaam', 'Wesley')
+            ->where('Achternaam', 'Borgman')
+            ->first()->Id
+            )->first()->Id,
+            'MedewerkerId' => 1,
+            'Bericht' => 'Dit is een testbericht voor Wesley Borgman.',
+            'VerzondenDatum' => now(),
+            'Status' => 'Verzonden',
+            'Isactief' => 1,
+            'Opmerking' => null,
+        ]);
     }
 }

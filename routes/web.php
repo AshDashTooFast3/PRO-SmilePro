@@ -75,7 +75,7 @@ Route::post('/Patient-toevoegen-update', [patientenController::class, 'update'])
 
 Route::get('/berichtenPatient', [BerichtController::class, 'berichtenPatient'])
     ->name('berichten.berichtenPatient')
-    ->middleware(['auth', 'role:patient']);
+    ->middleware(['auth', 'role:patient,praktijkmanagement']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
