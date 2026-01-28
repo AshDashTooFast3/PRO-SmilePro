@@ -23,125 +23,127 @@
                         </div>
                     @endif
 
-
-                    <div class="mt-6">
+                    <div class="mt-6 overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Patient naam
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Behandelingtype
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Factuurnummer
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Omschrijving
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-24">
                                         Datum
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-24">
                                         Tijd
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Status
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Bedrag
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Wijzigen
                                     </th>
                                     <th
-                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-32">
                                         Verwijderen
                                     </th>
-
-                                    @forelse($facturen as $factuur)
-                                <tr>
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $factuur->PatientVoornaam }} {{ $factuur->PatientTussenvoegsel }}
-                                        {{ $factuur->PatientAchternaam }}
-                                    </td>
-
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $factuur->BehandelingType }}
-                                    </td>
-
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $factuur->Nummer }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $factuur->Omschrijving }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $factuur->Datum }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ \Carbon\Carbon::parse($factuur->Tijd)->format('H:i') }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $factuur->Status }}
-                                    </td>
-
-                                    <td
-                                        class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        €{{ number_format($factuur->Bedrag, 2) }}
-                                    </td>
-
-                                     <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        <a href="{{ route('factuur.edit', $factuur->Id, ) }}" class="bg-green-300 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
-                                            Wijzigen
-                                        </a>
-                                    </td>
-
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        <form action="{{ route('factuur.delete') }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze factuur wilt annuleren?');">
-                                            @csrf
-                                            
-                                            <input type="hidden" name="id" value="{{ $factuur->Id }}">
-                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
-                                                Annuleren
-                                            </button>
-                                        </form>
-                                    </td>
-
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($facturen as $factuur)
+                                    <tr>
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $factuur->PatientVoornaam }} {{ $factuur->PatientTussenvoegsel }}
+                                            {{ $factuur->PatientAchternaam }}
+                                        </td>
 
-                            @empty
-                                <tr>
-                                    <td colspan="8"
-                                        class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">
-                                        <div class="flex justify-center items-center">
-                                            Geen facturen gevonden.
-                                        </div>
-                                    </td>
-                                </tr>
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $factuur->BehandelingType }}
+                                        </td>
+
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $factuur->Nummer }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $factuur->Omschrijving }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $factuur->Datum }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ \Carbon\Carbon::parse($factuur->Tijd)->format('H:i') }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            {{ $factuur->Status }}
+                                        </td>
+
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            €{{ number_format($factuur->Bedrag, 2) }}
+                                        </td>
+
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            <a href="{{ route('factuur.edit', $factuur->Id) }}"
+                                                class="bg-green-300 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
+                                                Wijzigen
+                                            </a>
+                                        </td>
+
+                                        <td
+                                            class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            <form action="{{ route('factuur.delete') }}" method="POST"
+                                                onsubmit="return confirm('Weet je zeker dat je deze factuur wilt annuleren?');">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $factuur->Id }}">
+                                                <button type="submit"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
+                                                    Verwijderen
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                @empty
+                                    <tr>
+                                        <td colspan="10"
+                                            class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-300">
+                                            <div class="flex justify-center items-center">
+                                                Geen facturen gevonden.
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforelse
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </x-app-layout>
