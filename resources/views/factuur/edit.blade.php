@@ -14,7 +14,7 @@
                         Factuur wijzigen
                     </h3>
 
-                    <form action="{{ route('patient.update', $patient->id) }}" method="POST">
+                    <form action="{{ route('factuur.update', $factuur->Id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         @if (session('success'))

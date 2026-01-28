@@ -109,7 +109,7 @@
                                     </td>
 
                                      <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
-                                        <a href="{{ route('factuur.edit', $factuur->Id) }}" class="bg-green-300 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
+                                        <a href="{{ route('factuur.edit', $factuur->Id, ) }}" class="bg-green-300 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
                                             Wijzigen
                                         </a>
                                     </td>
