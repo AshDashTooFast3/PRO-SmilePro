@@ -89,7 +89,7 @@ class BerichtController extends Controller
         }
     }
 
-        public function berichtenPatient()
+    public function berichtenPatient()
     {
         $gebruikerId = auth()->id();
 
