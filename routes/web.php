@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\BerichtController;
 use App\Http\Controllers\FactuurController;
 use App\Http\Controllers\MedewerkerOverzichtController;
 use App\Http\Controllers\patientenController;
 use App\Http\Controllers\PraktijkmanagementController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\BerichtController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,11 +19,10 @@ Route::get('/berichten', [BerichtController::class, 'index'])
 Route::get('/berichten/create', [BerichtController::class, 'create'])
     ->name('berichten.create')
     ->middleware(['auth', 'role:praktijkmanagement']);
-    
+
 Route::post('/berichten', [BerichtController::class, 'store'])
     ->name('berichten.store')
     ->middleware(['auth', 'role:praktijkmanagement']);
-
 
 Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'index'])
     ->name('praktijkmanagement.index')
@@ -44,6 +43,31 @@ Route::get('/factuur/create', [FactuurController::class, 'create'])
 Route::post('/factuur/store', [FactuurController::class, 'store'])
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
     ->name('factuur.store');
+
+Route::put('/factuur/{Id}', [FactuurController::class, 'update'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('factuur.update');
+
+Route::get('/factuur/{Id}/edit', [FactuurController::class, 'edit'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('factuur.edit');
+
+Route::post('/factuur/delete', [FactuurController::class, 'delete'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('factuur.delete');
+
+Route::get('/patient/{Id}', [patientenController::class, 'edit'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('patient.edit');
+
+Route::put('/patient/update', [patientenController::class, 'update'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('patient.update');
+
+Route::post('/patient/delete', [patientenController::class, 'delete'])
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
+    ->name('patient.delete');
+    
 
 Route::get('/medewerkers', [MedewerkerOverzichtController::class, 'index'])
     ->middleware(['auth', 'role:praktijkmanagement'])

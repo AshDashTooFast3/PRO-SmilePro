@@ -15,7 +15,8 @@ class patientenController extends Controller
         $patienten = Patient::getVolledigeNaamPatienten();
 
         if (empty($patienten)) {
-            Log::info('Geen patienten beschikbaar.'); }
+            Log::info('Geen patienten beschikbaar.');
+        }
 
         return view('patienten.overzicht-patienten',
             [
@@ -61,10 +62,10 @@ class patientenController extends Controller
 
             return view('patienten.Create-Patient', [
                 'title' => 'Patient Toevoegen',
-                'gebruikers' => $gebruikers, 
+                'gebruikers' => $gebruikers,
             ]);
         } catch (\Exception $e) {
-            Log::error('Fout bij ophalen gebruikers: ' . $e->getMessage());
+            Log::error('Fout bij ophalen gebruikers: '.$e->getMessage());
 
             return view('patienten.Create-Patient', [
                 'title' => 'Patient Toevoegen',
@@ -73,19 +74,38 @@ class patientenController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+
+        $patient = Patient::find($id);
+
+        if (! $patient) {
+            Log::info('Patient niet gevonden met id: '.$id);
+
+            return redirect()->route('overzicht-patienten.index')->with('error', 'Patient niet gevonden.'); // <-- Try dash instead of dot
+            // If route name is 'patienten-overzicht-patienten', use:
+            // return redirect()->route('patienten-overzicht-patienten')->with('error', 'Patient niet gevonden.');
+        }
+
+        return view('patienten.edit', [
+            'title' => 'Patient wijzigen',
+            'patient' => $patient,
+        ]);
+    }
+
     public function update(Request $request)
     {
-        $request->validate([
-            'gebruiker_id' => 'required|integer',
-            'medischdossier' => 'nullable|string',
+        $validated = $request->validate([
+            'id' => 'required|string',
+            'Nummer' => 'required|string',
+            'MedischDossier' => 'nullable|string',
+            'Opmerking' => 'nullable|string',
         ]);
 
-        $patient = new Patient;
-        $patient->Nummer = fake()->unique()->randomNumber(8);
-        $patient->persoonId = $request->gebruiker_id;
-        $patient->MedischDossier = $request->medischdossier;
-        $patient->Isactief = 1;
-        $patient->Opmerking = null;
+        $patient = Patient::find($validated['id']);
+        $patient->Nummer = $validated['Nummer'];
+        $patient->MedischDossier = $validated['MedischDossier'] ?? null;
+        $patient->Opmerking = $validated['Opmerking'] ?? null;
         $patient->save();
 
         $patienten = Patient::getVolledigeNaamPatienten();
@@ -95,5 +115,35 @@ class patientenController extends Controller
                 'patienten' => $patienten,
                 'title' => 'Patienten Overzicht',
             ]);
+    }
+
+    public function delete(Request $request)
+    {
+
+        $patient = Patient::find($request->patient_id);
+        if (! $patient) {
+            Log::warning('Factuur niet gevonden voor verwijdering. Id: '.$request->patient_id);
+
+            return redirect()->back();
+        }
+
+        // verwijder eerst alle afspraken
+        $patient->Afspraken()->delete();
+
+        // verwijder alle facturen indien aanwezig
+        if (method_exists($patient, 'Facturen')) {
+            $patient->Facturen()->delete();
+        }
+
+        // verwijder alle communicatie indien aanwezig
+        if (method_exists($patient, 'Communicatie')) {
+            $patient->Communicatie()->delete();
+        }
+
+        // dan de patient
+        $patient->delete();
+        Log::info('patient verwijderd. Id: '.$request->patient_id);
+
+        return redirect()->back()->with('success', 'patient succesvol verwijderd.');
     }
 }

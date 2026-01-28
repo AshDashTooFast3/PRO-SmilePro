@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
 
 class Patient extends Model
 {
@@ -29,12 +28,12 @@ class Patient extends Model
 
     // A Patient belongs to a Persoon
 
-    public static function getVolledigeNaamPatienten() 
+    public static function getVolledigeNaamPatienten()
     {
         return DB::select('CALL sp_getVolledigeNaamPatienten()');
     }
 
-    public static function getPatientFactuur($patientId) 
+    public static function getPatientFactuur($patientId)
     {
         return DB::select('CALL sp_getPatientFactuur(?)', [$patientId]);
     }
@@ -48,5 +47,14 @@ class Patient extends Model
     {
         return $this->hasMany(Factuur::class, 'PatientId', 'Id');
     }
-    
+
+    public function afspraken()
+    {
+        return $this->hasMany(Afspraken::class, 'PatientId', 'Id');
+    }
+
+    public function communicatie()
+    {
+        return $this->hasMany(Communicatie::class, 'PatientId', 'Id');
+    }
 }
