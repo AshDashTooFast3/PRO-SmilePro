@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            Afspraak maken
+            Afspraak bewerken
         </h2>
     </x-slot>
 
@@ -17,25 +17,26 @@
             </div>
         @endif
 
-        <form action="{{ route('afspraken.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('afspraken.update', $afspraak) }}" method="POST" class="space-y-6">
             @csrf
+            @method('PUT')
 
             <div>
                 <label class="block font-medium mb-1">Datum</label>
-                <input type="date" name="Datum" value="{{ old('Datum') }}"
+                <input type="date" name="Datum" value="{{ old('Datum', $afspraak->Datum) }}"
                        class="w-full bg-slate-800 border border-gray-600 rounded p-2 text-white">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Tijd</label>
-                <input type="time" name="Tijd" value="{{ old('Tijd') }}"
+                <input type="time" name="Tijd" value="{{ old('Tijd', $afspraak->Tijd) }}"
                        class="w-full bg-slate-800 border border-gray-600 rounded p-2 text-white">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Opmerking (optioneel)</label>
+                <label class="block font-medium mb-1">Opmerking</label>
                 <textarea name="Opmerking" rows="3"
-                          class="w-full bg-slate-800 border border-gray-600 rounded p-2 text-white">{{ old('Opmerking') }}</textarea>
+                          class="w-full bg-slate-800 border border-gray-600 rounded p-2 text-white">{{ old('Opmerking', $afspraak->Opmerking) }}</textarea>
             </div>
 
             <div class="flex justify-end gap-3">
@@ -46,7 +47,7 @@
 
                 <button type="submit"
                         class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
-                    Opslaan
+                    Bijwerken
                 </button>
             </div>
         </form>

@@ -11,47 +11,21 @@
                 </div>
 
                 <!-- Navigation Links -->
-<<<<<<< HEAD
-=======
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ _('Dashboard') }}
-                    </x-nav-link>
-                </div>
 
-                  {{ Auth::check() ? Auth::user()->rolename : 'Not logged in' }}
-                  @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement', 'Tandarts', 'Assistent', 'Mondhygienist', 'Patient']))
-                  <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                  <x-nav-link :href="route('afspraken.index')" :active="request()->routeIs('afspraken.index')">
-                              @if (Auth::user()->RolNaam === 'Patient')
-                              {{ _('Mijn afspraken') }}
-                              @else
-                              {{ _('Afspraak overzicht') }}
-                              @endif
-                  </x-nav-link>
-                </div>
-                  @endif
-
-                
-                 {{ Auth::check() ? Auth::user()->rolename : 'Not logged in' }}
-                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Patient']))
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('facturenOverzichtPatient.index')" :active="request()->routeIs('facturenOverzichtPatient.index')">
-                            {{ _('Mijn facturen') }}
-                        </x-nav-link>
-                    </div>
-                @endif
-
-                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement', 'Tandarts', 'Assistent', 'Mondhygienist']))
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('overzicht-patienten.index')" :active="request()->routeIs('overzicht-patienten.index')">
-                            {{ _('patienten-overzicht') }}
-                        </x-nav-link>
-                    </div>
-                @endif
-
->>>>>>> 095a80e (afspraak overzicht voor alle rollen patient rol heeft zijn eigen unieke pagina)
-
+                @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement', 'Tandarts', 'Assistent', 'mondhygienist']))
+    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+        <x-nav-link :href="route('afspraken.index')" :active="request()->routeIs('afspraken.index')">
+            {{ _('Afspraken') }}
+        </x-nav-link>
+    </div>
+@endif
+@if (Auth::check() && Auth::user()->RolNaam === 'Patient')
+    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+        <x-nav-link :href="route('afspraken.index')" :active="request()->routeIs('afspraken.index')">
+            {{ _('Mijn Afspraken') }}
+        </x-nav-link>
+    </div>
+@endif
                 @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement']))
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('praktijkmanagement.index')" :active="request()->routeIs('praktijkmanagement.index')">
@@ -172,7 +146,20 @@
             </div>
         @endif
 
-
+@if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement', 'Tandarts', 'Assistent', 'mondhygienist']))
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link :href="route('afspraken.index')" :active="request()->routeIs('afspraken.index')">
+            {{ _('Afspraken') }}
+        </x-responsive-nav-link>
+    </div>
+@endif
+@if (Auth::check() && Auth::user()->RolNaam === 'Patient')
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link :href="route('afspraken.index')" :active="request()->routeIs('afspraken.index')">
+            {{ _('Mijn Afspraken') }}
+        </x-responsive-nav-link>
+    </div>
+@endif
         @if (Auth::check() && in_array(Auth::user()->RolNaam, ['Praktijkmanagement']))
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('praktijkmanagement.index')" :active="request()->routeIs('praktijkmanagement.index')">
