@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Afspraak;
-use App\Models\Medewerker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -124,7 +123,7 @@ private function getRealPatientId($user)
     ]);
 
     // Random medewerker
-    $randomMedewerkerId = Medewerker::inRandomOrder()->value('Id');
+    $randomMedewerkerId = \App\Models\Medewerker::inRandomOrder()->value('Id');
 
     // Dubbele afspraak check
     $bestaatAl = Afspraak::where('Isactief', 1)
@@ -168,7 +167,11 @@ private function getRealPatientId($user)
         if ($user->RolNaam === 'Patient') {
             $patientId = $this->getRealPatientId($user);
 
-            if ($afspraak->PatientId !== $patientId || $afspraak->Isactief != 1) {
+            if (
+                $afspraak->PatientId !== $patientId ||
+                $afspraak->Isactief != 1 ||
+                $afspraak->Status === 'Geannuleerd'
+            ) {
                 abort(403);
             }
         }
@@ -194,7 +197,11 @@ private function getRealPatientId($user)
         if ($user->RolNaam === 'Patient') {
             $patientId = $this->getRealPatientId($user);
 
-            if ($afspraak->PatientId !== $patientId || $afspraak->Isactief != 1) {
+            if (
+                $afspraak->PatientId !== $patientId ||
+                $afspraak->Isactief != 1 ||
+                $afspraak->Status === 'Geannuleerd'
+            ) {
                 abort(403);
             }
         }
@@ -248,7 +255,11 @@ private function getRealPatientId($user)
         if ($user->RolNaam === 'Patient') {
             $patientId = $this->getRealPatientId($user);
 
-            if ($afspraak->PatientId !== $patientId || $afspraak->Isactief != 1) {
+            if (
+                $afspraak->PatientId !== $patientId ||
+                $afspraak->Isactief != 1 ||
+                $afspraak->Status === 'Geannuleerd'
+            ) {
                 abort(403);
             }
         }
