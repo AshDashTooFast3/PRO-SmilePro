@@ -43,6 +43,12 @@
                                     <th
                                         class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Factuur toesturen</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        wijzigen</th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        annuleren</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -67,6 +73,27 @@
                                                 <button type="submit"
                                                     class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                                     Factuur maken
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            <form action="{{ route('patient.edit', $patient->PatientId) }}" method="GET">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="inline-flex items-center rounded-md bg-green-600 px-3 py-1.5 text-sm text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                                    wijzigen
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-900 dark:text-gray-100">
+                                            <form action="{{ route('patient.delete') }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze patient wilt verwijderen?');">
+                                            @csrf
+                                                <input type="hidden" name="patient_id" value="{{ $patient->PatientId }}">
+                                                <button type="submit"
+                                                    class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                                                    verwijderen
                                                 </button>
                                             </form>
                                         </td>

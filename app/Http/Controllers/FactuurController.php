@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Behandeling;
 use App\Models\Factuur;
 use App\Models\Patient;
+use App\Models\Persoon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -122,5 +123,63 @@ class FactuurController extends Controller
         return redirect()
             ->route('overzicht-patienten.index')
             ->with('success', 'Factuur succesvol aangemaakt, zie de factuur overzicht bij de Factuur pagina.');
+    }
+
+    public function delete(Request $request)
+    {
+        $factuur = Factuur::find($request->id);
+        if (!$factuur) {
+            Log::warning('Factuur niet gevonden voor verwijdering. Id: ' . $request->id);
+            return redirect()->back();
+        }
+        $factuur->delete();
+        Log::info('Factuur verwijderd. Id: ' . $request->id);
+        return redirect()->back()->with('success', 'Factuur succesvol verwijderd.');
+    }
+
+    public function edit($Id) {
+        $gebruikerid = auth()->id();
+        $persoon = Persoon::where('GebruikerId', $gebruikerid)->first();
+        $factuur = Factuur::find($Id);
+        $behandeling = Behandeling::find($Id);
+       
+
+        return view('factuur.edit', [
+            'title' => 'Mijn Facturen',
+            'factuur' => $factuur,
+            'behandeling' => $behandeling,
+        ]);
+    }
+
+    public function update(Request $request) {
+        // validatie
+        $request->validate([
+            'Nummer' => 'required|string',
+            'Omschrijving' => 'required|string',
+            'Datum' => 'required|date',
+            'Tijd' => [
+                'required',
+                'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/',
+            ],
+            'Status' => 'required|string',
+            'Bedrag' => 'required|numeric',
+        ]);
+
+        $factuur = Factuur::find($request->Id);
+        if (!$factuur) {
+            Log::warning('Factuur niet gevonden voor update. Id: ' . $request->Id);
+            return redirect()->back()->with('error', 'Factuur niet gevonden.');
+        }
+        $factuur->Nummer = $request->Nummer;
+        $factuur->Omschrijving = $request->Omschrijving;
+        $factuur->Datum = $request->Datum;
+        $factuur->Tijd = $request->Tijd;
+        $factuur->Status = $request->Status;
+        $factuur->Bedrag = $request->Bedrag;
+        $factuur->save();
+
+        Log::info('Factuur bijgewerkt. Id: ' . $factuur->Id);
+        return redirect()->route('factuur.index')->with('success', 'Factuur succesvol bijgewerkt.');
+        
     }
 }
