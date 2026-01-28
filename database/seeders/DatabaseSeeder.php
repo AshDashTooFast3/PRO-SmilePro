@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
         Communicatie::factory()->create([
             'PatientId' => 2,
             'MedewerkerId' => 1,
-            'Bericht' => 'Dit is een testbericht voor Wesley Borgman.',
+            'Bericht' => 'Dit is een testbericht voor de unhappy scenarios.',
             'VerzondenDatum' => now(),
             'Status' => 'Verzonden',
             'Isactief' => 1,
@@ -96,7 +96,7 @@ class DatabaseSeeder extends Seeder
             ->first()->Id
             )->first()->Id,
             'MedewerkerId' => 1,
-            'Bericht' => 'Dit is een testbericht voor Wesley Borgman.',
+            'Bericht' => 'Dit is een testbericht voor happy scenarios.',
             'VerzondenDatum' => now(),
             'Status' => 'Verzonden',
             'Isactief' => 1,
