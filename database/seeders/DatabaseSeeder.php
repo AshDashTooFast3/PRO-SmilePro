@@ -79,6 +79,16 @@ class DatabaseSeeder extends Seeder
         $this->call(FactuurSeeder::class);
 
         //test bericht voor patient Wesley Borgman
+        Communicatie::factory()->create([
+            'PatientId' => 2,
+            'MedewerkerId' => 1,
+            'Bericht' => 'Dit is een testbericht voor Wesley Borgman.',
+            'VerzondenDatum' => now(),
+            'Status' => 'Verzonden',
+            'Isactief' => 1,
+            'Opmerking' => null,
+        ]);
+
         Communicatie::factory(2)->create([
             'PatientId' => Patient::where('PersoonId', 
             Persoon::where('Voornaam', 'Wesley')

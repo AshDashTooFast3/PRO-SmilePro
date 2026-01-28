@@ -28,6 +28,18 @@ Route::post('/berichten', [BerichtController::class, 'store'])
     ->name('berichten.store')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+Route::get('/berichten/{id}/edit', [BerichtController::class, 'edit'])
+    ->name('berichten.edit')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::put('/berichten/{id}', [BerichtController::class, 'update'])
+    ->name('berichten.update')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::delete('/berichten/{id}', [BerichtController::class, 'destroy'])
+    ->name('berichten.destroy')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 Route::get('/praktijkmanagement/index', [PraktijkmanagementController::class, 'index'])
     ->name('praktijkmanagement.index')
     ->middleware(['auth', 'role:praktijkmanagement']);
