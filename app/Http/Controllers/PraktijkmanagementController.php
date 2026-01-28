@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Afspraken;
+use App\Models\Afspraak;
 use App\Models\Communicatie;
 use App\Models\Factuur;
 use App\Models\Behandeling;
 use Illuminate\Http\Request;
+
+
 use Illuminate\Support\Facades\Log;
 
 class PraktijkmanagementController extends Controller
@@ -26,7 +28,8 @@ class PraktijkmanagementController extends Controller
     {
 
         // haalt het aantal afspraken op
-        $aantalAfspraken = Afspraken::getAfsprakenCount();
+        $aantalAfspraken = Afspraak::getAfsprakenCount();
+    
 
         // haalt het geld bedrag op van de facuturen
         $omzet = $this->factuur->BerekenOmzet();

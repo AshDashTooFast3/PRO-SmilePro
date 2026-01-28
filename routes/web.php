@@ -6,7 +6,9 @@ use App\Http\Controllers\MedewerkerOverzichtController;
 use App\Http\Controllers\patientenController;
 use App\Http\Controllers\PraktijkmanagementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AfspraakController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +53,7 @@ Route::get('/factuur', [FactuurController::class, 'index'])
 Route::get('/factuur/factuurPatient', [FactuurController::class, 'factuurPatient'])
     ->name('factuur.factuurPatient')
     ->middleware(['auth', 'role:patient']);
+
 
 Route::get('/factuur/create', [FactuurController::class, 'create'])
     ->middleware(['auth', 'role:tandarts,praktijkmanagement,assistent,mondhygienist'])
@@ -100,6 +103,18 @@ Route::post('/Patient-toevoegen-update', [patientenController::class, 'update'])
 Route::get('/berichtenPatient', [BerichtController::class, 'berichtenPatient'])
     ->name('berichten.berichtenPatient')
     ->middleware(['auth', 'role:patient,praktijkmanagement']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/afspraken', [AfspraakController::class, 'index'])->name('afspraken.index');
+    Route::get('/afspraken/maak', [AfspraakController::class, 'create'])->name('afspraken.create');
+    Route::post('/afspraken', [AfspraakController::class, 'store'])->name('afspraken.store');
+    Route::get('/afspraken/{afspraak}/bewerken', [AfspraakController::class, 'edit'])->name('afspraken.edit');
+    Route::put('/afspraken/{afspraak}', [AfspraakController::class, 'update'])->name('afspraken.update');
+    Route::delete('/afspraken/{afspraak}', [AfspraakController::class, 'destroy'])->name('afspraken.destroy');
+
+    // Status wijzigen door medewerker
+    Route::patch('/afspraken/{afspraak}/status', [AfspraakController::class, 'updateStatus'])
+        ->name('afspraken.updateStatus');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

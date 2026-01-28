@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Afspraken;
+use App\Models\Afspraak;
 
 class AfspraakSeeder extends Seeder
 {
@@ -12,6 +12,6 @@ class AfspraakSeeder extends Seeder
      */
     public function run(): void
     {
-        Afspraken::factory()->count(4)->create();
+        Afspraak::factory()->count(4)->create();
     }
 }
