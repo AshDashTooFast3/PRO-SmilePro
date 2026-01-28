@@ -50,7 +50,7 @@ class Patient extends Model
 
     public function afspraken()
     {
-        return $this->hasMany(Afspraken::class, 'PatientId', 'Id');
+        return $this->hasMany(Afspraak::class, 'PatientId', 'Id');
     }
 
     public function communicatie()
